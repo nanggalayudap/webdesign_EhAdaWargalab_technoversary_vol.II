@@ -1,0 +1,122 @@
+[
+  {
+    "id": "plastik-pet",
+    "nama": "Botol Plastik Bening (PET)",
+    "kategori": "Plastik",
+    "satuan": "kg",
+    "hargaPerSatuan": 4500,
+    "icon": "bottle",
+    "deskripsi": "Botol air mineral, botol minuman ringan bening bertanda logo daur ulang nomor 1.",
+    "tips": "Lepaskan tutup dan label plastik, bilas bersih dari sisa cairan, remukkan untuk menghemat ruang.",
+    "faktorEmisi": 1.5,
+    "faktorTPA": 0.003
+  },
+  {
+    "id": "plastik-hdpe",
+    "nama": "Plastik Keras / Tebal (HDPE)",
+    "kategori": "Plastik",
+    "satuan": "kg",
+    "hargaPerSatuan": 3800,
+    "icon": "flask-conical",
+    "deskripsi": "Botol sampo, jeriken minyak, wadah detergen, botol susu bertanda nomor 2.",
+    "tips": "Bilas sisa sabun atau cairan kimia, keringkan sebelum ditimbang.",
+    "faktorEmisi": 1.3,
+    "faktorTPA": 0.0028
+  },
+  {
+    "id": "plastik-cup",
+    "nama": "Gelas Plastik Bersih (PP)",
+    "kategori": "Plastik",
+    "satuan": "kg",
+    "hargaPerSatuan": 3000,
+    "icon": "cup-soda",
+    "deskripsi": "Gelas bekas minuman teh kemasan, kopi, air mineral cup nomor 5.",
+    "tips": "Kupas seal penutup atas, buang sedotan, susun bertumpuk rapi.",
+    "faktorEmisi": 1.2,
+    "faktorTPA": 0.0025
+  },
+  {
+    "id": "kardus",
+    "nama": "Kardus Bekas / Box Karton",
+    "kategori": "Kertas",
+    "satuan": "kg",
+    "hargaPerSatuan": 2200,
+    "icon": "package",
+    "deskripsi": "Kardus paket pengiriman, karton tebal cokelat bergelombang (corrugated).",
+    "tips": "Bongkar lipatan hingga pipih, lepaskan lakban plastik dan staples berlebih, ikat dengan rapi.",
+    "faktorEmisi": 0.95,
+    "faktorTPA": 0.002
+  },
+  {
+    "id": "kertas-hvs",
+    "nama": "Kertas HVS & Arsip / Majalah",
+    "kategori": "Kertas",
+    "satuan": "kg",
+    "hargaPerSatuan": 2500,
+    "icon": "newspaper",
+    "deskripsi": "Dokumen cetak, kertas skripsi/tugas bekas, majalah, buku teks non-plastik.",
+    "tips": "Pastikan kering, singkirkan binder clip, sampul mika, atau klip besi.",
+    "faktorEmisi": 1.1,
+    "faktorTPA": 0.0015
+  },
+  {
+    "id": "logam-kaleng",
+    "nama": "Kaleng Aluminium & Minuman",
+    "kategori": "Logam",
+    "satuan": "kg",
+    "hargaPerSatuan": 14000,
+    "icon": "disc",
+    "deskripsi": "Kaleng minuman soda, kaleng kopi aluminium tipis.",
+    "tips": "Injak atau pipihkan kaleng agar tidak memakan tempat dan mudah ditimbang.",
+    "faktorEmisi": 9.0,
+    "faktorTPA": 0.0018
+  },
+  {
+    "id": "logam-besi",
+    "nama": "Besi & Kaleng Susu / Biskuit",
+    "kategori": "Logam",
+    "satuan": "kg",
+    "hargaPerSatuan": 4200,
+    "icon": "anvil",
+    "deskripsi": "Kaleng biskuit lebar, kaleng susu kental manis, potongan besi perkakas rumah.",
+    "tips": "Bersihkan sisa makanan lengket dari dalam kaleng agar tidak berbau dan mengundang semut.",
+    "faktorEmisi": 1.8,
+    "faktorTPA": 0.0012
+  },
+  {
+    "id": "kaca-botol",
+    "nama": "Botol & Kaca Kemasan",
+    "kategori": "Kaca",
+    "satuan": "kg",
+    "hargaPerSatuan": 1200,
+    "icon": "wine",
+    "deskripsi": "Botol sirup, botol kecap, botol saus kaca bening/cokelat utuh.",
+    "tips": "Simpan dalam posisi berdiri atau terbungkus karton untuk menghindari pecahan berbahaya.",
+    "faktorEmisi": 0.3,
+    "faktorTPA": 0.001
+  },
+  {
+    "id": "minyak-jelantah",
+    "nama": "Minyak Jelantah (Used Cooking Oil)",
+    "kategori": "Minyak Jelantah",
+    "satuan": "liter",
+    "hargaPerSatuan": 7000,
+    "icon": "droplets",
+    "deskripsi": "Sisa minyak goreng bekas pakai rumah tangga atau UMKM untuk bahan baku biodiesel.",
+    "tips": "Saring sisa remah makanan, tuang ke dalam jeriken atau botol tertutup rapat saat dingin.",
+    "faktorEmisi": 2.5,
+    "faktorTPA": 0.001
+  },
+  {
+    "id": "elektronik-kecil",
+    "nama": "E-Waste / Elektronik Rumah Tangga",
+    "kategori": "Elektronik",
+    "satuan": "kg",
+    "hargaPerSatuan": 8500,
+    "icon": "cpu",
+    "deskripsi": "Kabel usang, charger rusak, keyboard bekas, komponen motherboard kecil.",
+    "tips": "Kumpulkan terpisah dalam kantong plastik kering, hindari baterai bocor.",
+    "faktorEmisi": 3.2,
+    "faktorTPA": 0.0016
+  }
+]
