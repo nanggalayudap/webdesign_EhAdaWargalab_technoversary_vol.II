@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitur Utama - Kalkulator Sampah & Peta Lokasi | SetorIn</title>
+  <meta name="description" content="Hitung estimasi nilai rupiah dan pengurangan emisi sampah rumah tanggamu, serta temukan lokasi bank sampah terdekat dengan peta interaktif Leaflet.js.">
+  <meta name="author" content="Eh Ada Wargalab - Techno Versary Vol. II">
+  <meta name="theme-color" content="#15803D">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Leaflet.js CSS CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#FAFAF9] text-[#14261C] flex flex-col min-h-screen selection:bg-emerald-200 selection:text-emerald-900">
+
+  <!-- =========================================================================
+       HEADER / NAVBAR
+       ========================================================================= -->
+  <header id="navbar" class="sticky top-0 z-50 bg-white transition-all duration-300 border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-800 to-emerald-600 flex items-center justify-center text-white shadow-md shadow-emerald-700/20 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-recycle text-xl"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-extrabold tracking-tight text-slate-900 font-heading">Setor<span class="text-emerald-700">In</span></span>
+              <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">EcoDigital</span>
+            </div>
+            <p class="text-xs text-slate-500 font-medium">Bank Sampah Digital</p>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+          <a href="index.html" class="nav-link text-slate-600 hover:text-emerald-700 transition">Beranda</a>
+          <a href="fitur.html" class="nav-link text-slate-600 hover:text-emerald-700 transition">Fitur Utama</a>
+          <a href="konten.html" class="nav-link text-slate-600 hover:text-emerald-700 transition">Panduan & Edukasi</a>
+          <a href="about.html" class="nav-link text-slate-600 hover:text-emerald-700 transition">Tentang Kami</a>
+          <a href="contact.html" class="nav-link text-slate-600 hover:text-emerald-700 transition">Kontak</a>
+        </nav>
+
+        <div class="hidden lg:flex items-center gap-3">
+          <a href="#kalkulator" class="px-5 py-2.5 rounded-xl font-semibold text-sm text-white bg-emerald-700 hover:bg-emerald-800 shadow-md shadow-emerald-700/20 transition-all hover:-translate-y-0.5 flex items-center gap-2">
+            <i class="fa-solid fa-calculator text-emerald-300"></i>
+            <span>Kalkulator</span>
+          </a>
+          <a href="#peta" class="px-4 py-2.5 rounded-xl font-semibold text-sm text-emerald-800 bg-emerald-100 hover:bg-emerald-200 transition-all flex items-center gap-2">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <span>Peta</span>
+          </a>
+        </div>
+
+        <div class="flex md:hidden">
+          <button id="mobile-menu-btn" type="button" aria-expanded="false" aria-label="Buka navigasi menu" class="p-2.5 rounded-xl text-slate-700 hover:text-emerald-700 hover:bg-slate-100 focus:outline-none">
+            <i class="fa-solid fa-bars text-2xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 space-y-2 shadow-xl">
+      <a href="index.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Beranda</a>
+      <a href="fitur.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Fitur Utama (Kalkulator & Peta)</a>
+      <a href="konten.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Panduan & Edukasi</a>
+      <a href="about.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Tentang Kami</a>
+      <a href="contact.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Kontak & Usulan Lokasi</a>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    
+    <!-- =========================================================================
+         PAGE HERO BANNER & QUICK JUMP
+         ========================================================================= -->
+    <section class="gradient-hero py-14 border-b border-emerald-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold mb-3">
+          <i class="fa-solid fa-wand-magic-sparkles text-emerald-600"></i>
+          <span>Fitur Interaktif SetorIn</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 font-heading mb-4">
+          Kalkulator Nilai & Peta Digital Bank Sampah
+        </h1>
+        <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed mb-6">
+          Dua instrumen digital utama untuk mempermudah gaya hidup minim sampah. Hitung nilai ekonomis sampahmu hari ini dan tentukan lokasi setor terdekat secara cepat.
+        </p>
+
+        <!-- Quick Section Jumps -->
+        <div class="flex items-center justify-center gap-3">
+          <a href="#kalkulator" class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-emerald-700 text-white hover:bg-emerald-800 shadow-md transition flex items-center gap-2">
+            <i class="fa-solid fa-calculator"></i>
+            <span>1. Kalkulator Nilai & Dampak</span>
+          </a>
+          <a href="#peta" class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white text-emerald-800 border border-emerald-300 hover:bg-emerald-50 shadow-sm transition flex items-center gap-2">
+            <i class="fa-solid fa-map-location-dot text-emerald-600"></i>
+            <span>2. Peta Lokasi Bank Sampah</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================================
+         BAGIAN 1: KALKULATOR NILAI SAMPAH & DAMPAK LINGKUNGAN
+         ========================================================================= -->
+    <section id="kalkulator" class="py-20 bg-white border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+          <span class="text-xs font-bold tracking-widest text-emerald-700 uppercase bg-emerald-100 px-3 py-1 rounded-full">Alat Hitung Otomatis</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">Kalkulator Nilai Sampah & Jejak Karbon</h2>
+          <p class="text-sm text-slate-600">
+            Pilih komoditas sampah daur ulang, tentukan berat atau volumenya, dan lihat ringkasan estimasi tabungan rupiah serta kontribusi nyata bagi bumi.
+          </p>
+        </div>
+
+        <div id="calculator-app" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          <!-- Sisi Kiri: Form Input & Keranjang Sampah -->
+          <div class="lg:col-span-7 space-y-6">
+            
+            <!-- Card Input Sampah -->
+            <div class="p-6 sm:p-7 rounded-3xl bg-[#FAFAF9] border border-slate-200/80 shadow-sm space-y-5">
+              
+              <div class="flex items-center justify-between pb-3 border-b border-slate-200/80">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center text-sm font-bold">
+                    <i class="fa-solid fa-plus"></i>
+                  </span>
+                  <h3 class="text-sm sm:text-base font-bold text-slate-900 font-heading">Tambah Jenis Sampah</h3>
+                </div>
+                <span class="text-xs text-slate-400">10 Komoditas Tersedia</span>
+              </div>
+
+              <!-- Input Dropdown & Stepper -->
+              <div class="space-y-4">
+                <div>
+                  <label for="calc-item-select" class="block text-xs font-bold text-slate-700 mb-1.5">Pilih Kategori Sampah</label>
+                  <select id="calc-item-select" class="form-input text-xs sm:text-sm">
+                    <option value="">Memuat data harga sampah...</option>
+                  </select>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
+                  <div>
+                    <label for="calc-item-amount" class="block text-xs font-bold text-slate-700 mb-1.5">
+                      Jumlah Berat / Volume (<span id="calc-unit-label" class="text-emerald-700 font-bold">kg</span>)
+                    </label>
+                    <div class="relative">
+                      <input type="number" id="calc-item-amount" value="1" min="0.1" step="0.5" class="form-input text-xs sm:text-sm pr-12 font-bold text-slate-800">
+                      <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 pointer-events-none">qty</span>
+                    </div>
+                  </div>
+
+                  <button id="btn-add-item" type="button" class="w-full py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-emerald-700 hover:bg-emerald-800 shadow-md shadow-emerald-700/20 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-cart-plus"></i>
+                    <span>Masukkan ke Daftar</span>
+                  </button>
+                </div>
+
+                <!-- Tips Pemilahan Dinamis -->
+                <div id="calc-quick-tips" class="hidden p-3.5 rounded-xl bg-amber-50/80 border border-amber-200/80 text-xs text-amber-900 leading-relaxed"></div>
+              </div>
+
+              <!-- Presets Cepat -->
+              <div class="pt-2 border-t border-slate-200/60">
+                <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">Simulasi Cepat (Preset Sekali Klik):</p>
+                <div class="flex flex-wrap gap-2">
+                  <button id="preset-mahasiswa" type="button" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-emerald-500 hover:text-emerald-700 text-xs font-medium text-slate-700 transition">
+                    🎒 Anak Kos / Mahasiswa
+                  </button>
+                  <button id="preset-keluarga" type="button" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-emerald-500 hover:text-emerald-700 text-xs font-medium text-slate-700 transition">
+                    🏡 Rumah Tangga Bulanan
+                  </button>
+                  <button id="preset-kantor" type="button" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-emerald-500 hover:text-emerald-700 text-xs font-medium text-slate-700 transition">
+                    🏢 Kantor & Arsip HVS
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Keranjang / Daftar Item Terpilih -->
+            <div class="p-6 sm:p-7 rounded-3xl bg-[#FAFAF9] border border-slate-200/80 shadow-sm space-y-4">
+              <div class="flex items-center justify-between">
+                <h3 class="text-sm sm:text-base font-bold text-slate-900 font-heading flex items-center gap-2">
+                  <i class="fa-solid fa-list-check text-emerald-700"></i>
+                  <span>Daftar Sampah Terpilih</span>
+                </h3>
+                <button type="button" onclick="clearBasket()" class="text-xs font-semibold text-rose-600 hover:text-rose-800 transition">
+                  <i class="fa-regular fa-trash-can mr-1"></i> Kosongkan
+                </button>
+              </div>
+
+              <!-- Dynamic Items List Container -->
+              <div id="calc-basket-list" class="space-y-2.5"></div>
+
+              <!-- Empty State -->
+              <div id="calc-empty-basket" class="hidden text-center py-8 px-4 rounded-2xl bg-white border border-dashed border-slate-200">
+                <i class="fa-solid fa-basket-shopping text-3xl text-slate-300 mb-2"></i>
+                <p class="text-xs font-bold text-slate-700">Daftar masih kosong</p>
+                <p class="text-[11px] text-slate-500">Pilih jenis sampah di atas atau gunakan tombol simulasi cepat.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Sisi Kanan: Ringkasan Nilai & Dampak Lingkungan -->
+          <div class="lg:col-span-5 space-y-6">
+            
+            <div class="rounded-3xl gradient-eco text-white p-6 sm:p-8 shadow-xl relative overflow-hidden space-y-6">
+              
+              <!-- Subtle Background Icon -->
+              <i class="fa-solid fa-leaf text-white/5 text-9xl absolute -right-6 -bottom-6 pointer-events-none"></i>
+
+              <div>
+                <span class="text-xs font-bold tracking-wider text-emerald-200 uppercase">Total Estimasi Nilai Ekonomi</span>
+                <div class="flex items-baseline gap-2 mt-1">
+                  <p id="calc-total-rupiah" class="text-3xl sm:text-4xl font-black font-heading tracking-tight text-white">Rp 0</p>
+                </div>
+                <p class="text-[11px] text-emerald-200/80 mt-1">
+                  *Estimasi sebelum verifikasi timbangan petugas bank sampah.
+                </p>
+              </div>
+
+              <!-- Metrics Grid -->
+              <div class="grid grid-cols-3 gap-3 pt-4 border-t border-emerald-700/60">
+                <div class="p-3 rounded-xl bg-white/10 backdrop-blur-sm text-center">
+                  <span class="text-[11px] text-emerald-200 block">Total Berat</span>
+                  <strong id="calc-total-berat" class="text-base font-extrabold font-heading text-white">0.0 kg</strong>
+                </div>
+
+                <div class="p-3 rounded-xl bg-white/10 backdrop-blur-sm text-center">
+                  <span class="text-[11px] text-emerald-200 block">Pencegahan CO₂</span>
+                  <strong id="calc-total-emisi" class="text-base font-extrabold font-heading text-emerald-300">0.0 kg</strong>
+                </div>
+
+                <div class="p-3 rounded-xl bg-white/10 backdrop-blur-sm text-center">
+                  <span class="text-[11px] text-emerald-200 block">Ruang TPA</span>
+                  <strong id="calc-total-tpa" class="text-base font-extrabold font-heading text-white">0 Liter</strong>
+                </div>
+              </div>
+
+              <!-- Ekuivalen Dampak Nyata -->
+              <div class="p-4 rounded-2xl bg-black/20 backdrop-blur-sm space-y-3">
+                <p class="text-xs font-bold text-emerald-200 flex items-center gap-1.5">
+                  <i class="fa-solid fa-earth-americas text-emerald-400"></i>
+                  <span>Ekuivalen Dampak Lingkunganmu:</span>
+                </p>
+
+                <div class="space-y-2 text-xs">
+                  <div class="flex items-center justify-between">
+                    <span class="text-emerald-100 flex items-center gap-2">
+                      <i class="fa-regular fa-lightbulb text-amber-300"></i> Menyalakan Lampu LED
+                    </span>
+                    <span id="calc-eq-led" class="font-bold text-white">0 Jam</span>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="text-emerald-100 flex items-center gap-2">
+                      <i class="fa-solid fa-motorcycle text-cyan-300"></i> Berkendara Motor Listrik
+                    </span>
+                    <span id="calc-eq-motor" class="font-bold text-white">0 Km</span>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="text-emerald-100 flex items-center gap-2">
+                      <i class="fa-solid fa-tree text-green-300"></i> Serapan Karbon Pohon
+                    </span>
+                    <span id="calc-eq-pohon" class="font-bold text-white">0 Pohon</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="pt-2 flex flex-col gap-2.5">
+                <a href="#peta" class="w-full py-3 rounded-xl bg-white text-emerald-900 hover:bg-emerald-50 text-xs font-extrabold text-center transition flex items-center justify-center gap-2 shadow-md">
+                  <i class="fa-solid fa-map-pin text-emerald-700"></i>
+                  <span>Cari Lokasi Bank Sampah Penampung</span>
+                </a>
+              </div>
+
+            </div>
+
+            <!-- Disclaimer Notice Box -->
+            <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 leading-relaxed flex items-start gap-3">
+              <i class="fa-solid fa-circle-exclamation text-amber-600 text-base mt-0.5 shrink-0"></i>
+              <div>
+                <strong class="font-bold">Catatan Ketentuan Harga:</strong>
+                <p class="mt-0.5 text-amber-800">
+                  Harga yang tertera merupakan harga estimasi referensi industri daur ulang. Nilai transaksi riil bergantung pada kondisi kebersihan material, tingkat kekeringan, dan kebijakan masing-masing unit bank sampah mitra.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================================
+         BAGIAN 2: PETA INTERAKTIF BANK SAMPAH (LEAFLET.JS)
+         ========================================================================= -->
+    <section id="peta" class="py-20 bg-[#FAFAF9]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+          <span class="text-xs font-bold tracking-widest text-emerald-700 uppercase bg-emerald-100 px-3 py-1 rounded-full">Peta Digital OpenStreetMap</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">Temukan Bank Sampah Terdekat</h2>
+          <p class="text-sm text-slate-600">
+            Jelajahi titik bank sampah resmi yang terdata, periksa jenis sampah yang diterima, jam buka, dan hubungi kontak penanggung jawab secara langsung.
+          </p>
+        </div>
+
+        <!-- Filter Controls Toolbar -->
+        <div class="p-4 sm:p-5 rounded-3xl bg-white border border-slate-200 shadow-sm mb-8 space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+            
+            <!-- Search Input -->
+            <div class="sm:col-span-5 relative">
+              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+              <input type="text" id="map-search-input" placeholder="Cari nama bank sampah atau jalan..." class="form-input text-xs sm:text-sm pl-9">
+            </div>
+
+            <!-- Category Filter Dropdown -->
+            <div class="sm:col-span-3">
+              <select id="map-category-filter" class="form-input text-xs sm:text-sm">
+                <option value="Semua">Semua Kategori Sampah</option>
+                <option value="Plastik">Menerima Plastik</option>
+                <option value="Kertas">Menerima Kertas / Kardus</option>
+                <option value="Logam">Menerima Logam / Kaleng</option>
+                <option value="Kaca">Menerima Botol Kaca</option>
+                <option value="Minyak Jelantah">Menerima Jelantah</option>
+                <option value="Elektronik">Menerima E-Waste</option>
+              </select>
+            </div>
+
+            <!-- Checkbox Layanan Jemput -->
+            <div class="sm:col-span-2 flex items-center">
+              <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700">
+                <input type="checkbox" id="map-jemput-filter" class="accent-emerald-700 w-4 h-4 rounded">
+                <span>Ada Jemput Sampah</span>
+              </label>
+            </div>
+
+            <!-- Buttons: GPS & Reset -->
+            <div class="sm:col-span-2 flex items-center gap-2 justify-end">
+              <button id="map-geoloc-btn" type="button" class="py-2.5 px-3 rounded-xl bg-emerald-100 text-emerald-800 hover:bg-emerald-200 text-xs font-bold transition flex items-center gap-1.5" title="Deteksi Lokasi GPS Saya">
+                <i class="fa-solid fa-location-crosshairs"></i>
+                <span class="hidden md:inline">Lokasi Saya</span>
+              </button>
+              <button id="map-reset-filter" type="button" class="py-2.5 px-3 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-bold transition" title="Reset Filter">
+                <i class="fa-solid fa-rotate-left"></i>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Counter Strip & Hint -->
+          <div class="flex items-center justify-between text-xs pt-3 border-t border-slate-100">
+            <span id="map-locations-count" class="font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
+              10 Lokasi Ditemukan
+            </span>
+            <span class="text-slate-400 hidden sm:inline">
+              <i class="fa-regular fa-hand-pointer mr-1"></i> Klik kartu bank sampah di samping untuk melihat titik di peta
+            </span>
+          </div>
+        </div>
+
+        <!-- Split Grid: Map & Locations List -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Sisi Kiri / Kolom List Bank Sampah -->
+          <div class="lg:col-span-5 space-y-3 max-h-[520px] overflow-y-auto pr-1" id="map-locations-list">
+            <!-- Rendered by js/peta.js -->
+          </div>
+
+          <!-- Sisi Kanan / Map Container Leaflet.js -->
+          <div class="lg:col-span-7 rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-100 relative">
+            <div id="map"></div>
+          </div>
+
+        </div>
+
+        <!-- Ajakan Usulkan Lokasi Baru -->
+        <div class="mt-12 p-6 rounded-2xl bg-white border border-slate-200 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="text-left">
+            <h4 class="text-sm font-bold text-slate-900">Punya Bank Sampah di Lingkunganmu yang Belum Terdaftar?</h4>
+            <p class="text-xs text-slate-500">Bantu tetangga dan warga sekitarmu menemukan bank sampah dengan mendaftarkannya ke SetorIn.</p>
+          </div>
+          <a href="contact.html" class="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl shadow-md transition whitespace-nowrap">
+            <i class="fa-solid fa-plus-circle mr-1"></i> Usulkan Bank Sampah
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       FOOTER
+       ========================================================================= -->
+  <footer class="bg-[#14261C] text-slate-300 pt-16 pb-12 border-t border-emerald-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
+        
+        <div class="lg:col-span-2 space-y-4">
+          <a href="index.html" class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-lg">
+              <i class="fa-solid fa-recycle"></i>
+            </div>
+            <span class="text-2xl font-extrabold text-white font-heading">Setor<span class="text-emerald-400">In</span></span>
+          </a>
+          <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
+            Platform web bank sampah digital yang mengintegrasikan edukasi pemilahan sampah dari rumah, transparansi estimasi nilai ekonomi, dan peta lokasi bank sampah terdekat untuk mewujudkan ekonomi sirkular ramah lingkungan.
+          </p>
+          <div class="pt-2 text-xs text-emerald-400 font-semibold space-y-1">
+            <p><i class="fa-solid fa-award mr-1.5"></i> Lomba Web Design Techno Versary Vol. II</p>
+            <p><i class="fa-solid fa-users mr-1.5"></i> Tim: <strong>Eh Ada Wargalab</strong></p>
+            <p><i class="fa-solid fa-seedling mr-1.5"></i> Subtema 5: <strong>EcoDigital For Environment</strong></p>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4 font-heading">Halaman</h4>
+          <ul class="space-y-2.5 text-xs text-slate-400">
+            <li><a href="index.html" class="hover:text-emerald-400 transition">Beranda</a></li>
+            <li><a href="fitur.html" class="hover:text-emerald-400 transition">Fitur Utama (Kalkulator & Peta)</a></li>
+            <li><a href="konten.html" class="hover:text-emerald-400 transition">Panduan & Edukasi Pilah</a></li>
+            <li><a href="about.html" class="hover:text-emerald-400 transition">Tentang Kami & Profil Tim</a></li>
+            <li><a href="contact.html" class="hover:text-emerald-400 transition">Kontak & Usulan Lokasi</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4 font-heading">Komoditas Daur Ulang</h4>
+          <ul class="space-y-2.5 text-xs text-slate-400">
+            <li><span class="hover:text-emerald-400 transition cursor-pointer">Botol Plastik PET</span></li>
+            <li><span class="hover:text-emerald-400 transition cursor-pointer">Kardus & Karton Box</span></li>
+            <li><span class="hover:text-emerald-400 transition cursor-pointer">Kaleng Aluminium & Besi</span></li>
+            <li><span class="hover:text-emerald-400 transition cursor-pointer">Minyak Jelantah (Biodiesel)</span></li>
+            <li><span class="hover:text-emerald-400 transition cursor-pointer">E-Waste / Limbah Elektronik</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4 font-heading">Kabar Lingkungan</h4>
+          <p class="text-xs text-slate-400 leading-relaxed mb-3">
+            Dapatkan tips mingguan pengurangan sampah dan kabar harga daur ulang terbaru.
+          </p>
+          <form class="newsletter-form space-y-2">
+            <input type="email" required placeholder="Masukkan email kamu..." class="w-full px-3 py-2 text-xs rounded-lg bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500">
+            <button type="submit" class="w-full py-2 bg-emerald-700 hover:bg-emerald-600 text-white rounded-lg text-xs font-bold transition">
+              Langganan Buletin
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        <p>© 2026 SetorIn. Karya untuk Lomba Web Design Techno Versary Vol. II oleh Tim <strong>Eh Ada Wargalab</strong>.</p>
+        <div class="flex items-center gap-4">
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition" aria-label="GitHub Repository"><i class="fa-brands fa-github text-base"></i></a>
+          <a href="#" class="hover:text-emerald-400 transition" aria-label="Instagram"><i class="fa-brands fa-instagram text-base"></i></a>
+          <a href="#" class="hover:text-emerald-400 transition" aria-label="YouTube"><i class="fa-brands fa-youtube text-base"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Leaflet.js JS CDN -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- App Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/kalkulator.js"></script>
+  <script src="js/peta.js"></script>
+</body>
+</html>

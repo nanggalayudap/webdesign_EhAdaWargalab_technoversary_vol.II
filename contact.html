@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontak & Usulkan Lokasi - SetorIn | Bank Sampah Digital</title>
+  <meta name="description" content="Hubungi tim SetorIn atau daftarkan bank sampah baru di daerahmu untuk ditambahkan ke peta digital SetorIn.">
+  <meta name="author" content="Eh Ada Wargalab - Techno Versary Vol. II">
+  <meta name="theme-color" content="#15803D">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#FAFAF9] text-[#14261C] flex flex-col min-h-screen selection:bg-emerald-200 selection:text-emerald-900">
+
+  <!-- =========================================================================
+       HEADER / NAVBAR
+       ========================================================================= -->
+  <header id="navbar" class="sticky top-0 z-50 bg-white transition-all duration-300 border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-800 to-emerald-600 flex items-center justify-center text-white shadow-md shadow-emerald-700/20 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-recycle text-xl"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-extrabold tracking-tight text-slate-900 font-heading">Setor<span class="text-emerald-700">In</span></span>
+              <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">EcoDigital</span>
+            </div>
+            <p class="text-xs text-slate-500 font-medium">Bank Sampah Digital</p>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+          <a href="index.html" class="nav-link text-slate-600 hover:text-emerald-700 transition">Beranda</a>
+          <a href="fitur.html" class="nav-link text-slate-600 hover:text-emerald-700 transition">Fitur Utama</a>
+          <a href="konten.html" class="nav-link text-slate-600 hover:text-emerald-700 transition">Panduan & Edukasi</a>
+          <a href="about.html" class="nav-link text-slate-600 hover:text-emerald-700 transition">Tentang Kami</a>
+          <a href="contact.html" class="nav-link text-slate-600 hover:text-emerald-700 transition">Kontak</a>
+        </nav>
+
+        <div class="hidden lg:flex items-center gap-3">
+          <a href="fitur.html#kalkulator" class="px-5 py-2.5 rounded-xl font-semibold text-sm text-white bg-emerald-700 hover:bg-emerald-800 shadow-md shadow-emerald-700/20 transition-all hover:-translate-y-0.5 flex items-center gap-2">
+            <i class="fa-solid fa-calculator text-emerald-300"></i>
+            <span>Hitung Nilai Sampah</span>
+          </a>
+        </div>
+
+        <div class="flex md:hidden">
+          <button id="mobile-menu-btn" type="button" aria-expanded="false" aria-label="Buka navigasi menu" class="p-2.5 rounded-xl text-slate-700 hover:text-emerald-700 hover:bg-slate-100 focus:outline-none">
+            <i class="fa-solid fa-bars text-2xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 space-y-2 shadow-xl">
+      <a href="index.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Beranda</a>
+      <a href="fitur.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Fitur Utama (Kalkulator & Peta)</a>
+      <a href="konten.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Panduan & Edukasi</a>
+      <a href="about.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Tentang Kami</a>
+      <a href="contact.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Kontak & Usulan Lokasi</a>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    
+    <!-- =========================================================================
+         PAGE HERO
+         ========================================================================= -->
+    <section class="gradient-hero py-16 border-b border-emerald-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold mb-4">
+          <i class="fa-solid fa-headset"></i>
+          <span>Pusat Komunikasi & Kolaborasi</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 font-heading mb-4">
+          Hubungi Kami & Usulkan Bank Sampah
+        </h1>
+        <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          Punya pertanyaan, masukan pengembangan, atau ingin mendaftarkan bank sampah di lingkungan RT/RW kamu? Kirimkan formulir di bawah ini!
+        </p>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         CONTACT DETAILS & INTERACTIVE FORMS
+         ========================================================================= -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          <!-- Kolom Kiri: Contact Cards & Info -->
+          <div class="lg:col-span-5 space-y-6">
+            <div>
+              <span class="text-xs font-bold tracking-widest text-emerald-700 uppercase bg-emerald-100 px-3 py-1 rounded-full">Informasi Resmi</span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-heading mt-3 mb-4">
+                Terhubung dengan Tim SetorIn
+              </h2>
+              <p class="text-sm text-slate-600 leading-relaxed mb-6">
+                Kami siap membantu masyarakat, komunitas pecinta lingkungan, dan pengelola bank sampah di seluruh wilayah nusantara.
+              </p>
+            </div>
+
+            <!-- Card 1: Email -->
+            <div class="p-5 rounded-2xl bg-[#FAFAF9] border border-slate-200 flex items-start gap-4 card-hover">
+              <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xl shrink-0">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-bold text-slate-900">Email Korespondensi</h3>
+                <p class="text-xs text-slate-500 mb-1">Dibalas dalam 1x24 jam kerja</p>
+                <a href="mailto:kontak@setorin.id" class="text-xs font-bold text-emerald-700 hover:underline">kontak@setorin.id</a>
+              </div>
+            </div>
+
+            <!-- Card 2: WhatsApp / Hotline -->
+            <div class="p-5 rounded-2xl bg-[#FAFAF9] border border-slate-200 flex items-start gap-4 card-hover">
+              <div class="w-12 h-12 rounded-xl bg-green-100 text-green-800 flex items-center justify-center text-xl shrink-0">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-bold text-slate-900">Hotline & WhatsApp Edukasi</h3>
+                <p class="text-xs text-slate-500 mb-1">Senin - Sabtu: 08.00 - 17.00 WIB</p>
+                <a href="https://wa.me/6281234567890" target="_blank" class="text-xs font-bold text-emerald-700 hover:underline">+62 812-3456-7890</a>
+              </div>
+            </div>
+
+            <!-- Card 3: Markas Komunitas -->
+            <div class="p-5 rounded-2xl bg-[#FAFAF9] border border-slate-200 flex items-start gap-4 card-hover">
+              <div class="w-12 h-12 rounded-xl bg-teal-100 text-teal-800 flex items-center justify-center text-xl shrink-0">
+                <i class="fa-solid fa-map-pin"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-bold text-slate-900">Sekretariat Pengembang</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Eh Ada Wargalab Innovation Lab, Jawa Timur, Indonesia.
+                </p>
+              </div>
+            </div>
+
+            <!-- Social Media Box -->
+            <div class="p-6 rounded-2xl bg-emerald-50/70 border border-emerald-200">
+              <h3 class="text-sm font-bold text-emerald-950 mb-3">Ikuti Gerakan Kami</h3>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Dapatkan update program pemilahan sampah, kompetisi daur ulang, dan event edukasi lingkungan di media sosial kami.
+              </p>
+              <div class="flex gap-3">
+                <a href="#" class="w-9 h-9 rounded-xl bg-white border border-emerald-200 text-emerald-700 flex items-center justify-center hover:bg-emerald-700 hover:text-white transition">
+                  <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="#" class="w-9 h-9 rounded-xl bg-white border border-emerald-200 text-emerald-700 flex items-center justify-center hover:bg-emerald-700 hover:text-white transition">
+                  <i class="fa-brands fa-tiktok"></i>
+                </a>
+                <a href="#" class="w-9 h-9 rounded-xl bg-white border border-emerald-200 text-emerald-700 flex items-center justify-center hover:bg-emerald-700 hover:text-white transition">
+                  <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="w-9 h-9 rounded-xl bg-white border border-emerald-200 text-emerald-700 flex items-center justify-center hover:bg-emerald-700 hover:text-white transition">
+                  <i class="fa-brands fa-github"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kolom Kanan: Tab Switcher & Interactive Forms -->
+          <div class="lg:col-span-7">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xl">
+              
+              <!-- Tab Header Switcher -->
+              <div class="flex p-1.5 rounded-2xl bg-slate-100 border border-slate-200/80 mb-8">
+                <button id="tab-btn-contact" class="flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold text-emerald-800 bg-white shadow-sm transition-all flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-comment-dots text-emerald-600"></i>
+                  <span>Kirim Pesan</span>
+                </button>
+                <button id="tab-btn-usul" class="flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 transition-all flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-map-location-dot text-slate-500"></i>
+                  <span>Usulkan Bank Sampah</span>
+                </button>
+              </div>
+
+              <!-- FORM 1: PESAN UMUM -->
+              <form id="form-contact" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5" for="nama-kontak">Nama Lengkap *</label>
+                    <input type="text" id="nama-kontak" required placeholder="Contoh: Budi Santoso" class="form-input text-xs sm:text-sm">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5" for="email-kontak">Alamat Email *</label>
+                    <input type="email" id="email-kontak" required placeholder="nama@email.com" class="form-input text-xs sm:text-sm">
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5" for="phone-kontak">Nomor WhatsApp / HP</label>
+                    <input type="tel" id="phone-kontak" placeholder="08123456789" class="form-input text-xs sm:text-sm">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5" for="subjek-kontak">Kategori Pesan *</label>
+                    <select id="subjek-kontak" required class="form-input text-xs sm:text-sm">
+                      <option value="">Pilih Kategori...</option>
+                      <option value="Tanya Fitur">Pertanyaan Fitur Kalkulator / Peta</option>
+                      <option value="Kerjasama Bank Sampah">Kemitraan Bank Sampah</option>
+                      <option value="Masukan Website">Saran & Kritik Pengembangan</option>
+                      <option value="Lainnya">Pertanyaan Lainnya</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5" for="pesan-kontak">Isi Pesan / Pertanyaan *</label>
+                  <textarea id="pesan-kontak" rows="4" required placeholder="Tuliskan pesan kamu dengan jelas..." class="form-input text-xs sm:text-sm"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-xl font-bold text-sm text-white bg-emerald-700 hover:bg-emerald-800 shadow-md shadow-emerald-700/20 transition flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-paper-plane text-emerald-300"></i>
+                  <span>Kirim Pesan Sekarang</span>
+                </button>
+              </form>
+
+              <!-- FORM 2: USULKAN BANK SAMPAH BARU -->
+              <form id="form-usul" class="space-y-4 hidden">
+                <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 leading-relaxed mb-4">
+                  <i class="fa-solid fa-circle-info text-emerald-700 mr-1.5"></i>
+                  Data yang kamu ajukan akan diverifikasi oleh tim kurasi sebelum ditampilkan secara publik di peta SetorIn.
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5" for="nama-bs">Nama Bank Sampah / Komunitas *</label>
+                    <input type="text" id="nama-bs" required placeholder="Contoh: Bank Sampah Melati Asri" class="form-input text-xs sm:text-sm">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5" for="pic-bs">Nama Penanggung Jawab (PIC) *</label>
+                    <input type="text" id="pic-bs" required placeholder="Contoh: Ibu Rina Suryani" class="form-input text-xs sm:text-sm">
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5" for="phone-bs">WhatsApp PIC Aktif *</label>
+                    <input type="tel" id="phone-bs" required placeholder="08xxxxxxxxxx" class="form-input text-xs sm:text-sm">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5" for="jam-bs">Hari & Jam Operasional *</label>
+                    <input type="text" id="jam-bs" required placeholder="Contoh: Senin - Sabtu: 08.00 - 15.00" class="form-input text-xs sm:text-sm">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5" for="alamat-bs">Alamat Lengkap & Patokan Wilayah *</label>
+                  <textarea id="alamat-bs" rows="2" required placeholder="Jalan, RT/RW, Kelurahan, Kecamatan, Kota..." class="form-input text-xs sm:text-sm"></textarea>
+                </div>
+
+                <!-- Checkbox Jenis Sampah -->
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-2">Jenis Sampah yang Diterima *</label>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                    <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-50 border border-slate-200 cursor-pointer hover:bg-emerald-50">
+                      <input type="checkbox" name="sampah-kategori" value="Plastik" checked class="accent-emerald-700">
+                      <span>Plastik (PET/HDPE)</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-50 border border-slate-200 cursor-pointer hover:bg-emerald-50">
+                      <input type="checkbox" name="sampah-kategori" value="Kertas" checked class="accent-emerald-700">
+                      <span>Kardus & Kertas</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-50 border border-slate-200 cursor-pointer hover:bg-emerald-50">
+                      <input type="checkbox" name="sampah-kategori" value="Logam" checked class="accent-emerald-700">
+                      <span>Logam & Kaleng</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-50 border border-slate-200 cursor-pointer hover:bg-emerald-50">
+                      <input type="checkbox" name="sampah-kategori" value="Kaca" class="accent-emerald-700">
+                      <span>Botol Kaca</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-50 border border-slate-200 cursor-pointer hover:bg-emerald-50">
+                      <input type="checkbox" name="sampah-kategori" value="Minyak Jelantah" class="accent-emerald-700">
+                      <span>Minyak Jelantah</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-50 border border-slate-200 cursor-pointer hover:bg-emerald-50">
+                      <input type="checkbox" name="sampah-kategori" value="Elektronik" class="accent-emerald-700">
+                      <span>E-Waste</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5" for="jemput-bs">Layanan Jemput Sampah?</label>
+                    <select id="jemput-bs" class="form-input text-xs sm:text-sm">
+                      <option value="Tersedia">Ya, Tersedia Layanan Jemput</option>
+                      <option value="Tidak">Tidak (Hanya Drop-Off Langsung)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5" for="foto-bs">Link Dokumen / Medsos (Opsional)</label>
+                    <input type="text" id="foto-bs" placeholder="https://instagram.com/..." class="form-input text-xs sm:text-sm">
+                  </div>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-xl font-bold text-sm text-white bg-emerald-700 hover:bg-emerald-800 shadow-md shadow-emerald-700/20 transition flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-plus-circle text-emerald-300"></i>
+                  <span>Kirim Usulan Bank Sampah</span>
+                </button>
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         FAQ SECTION
+         ========================================================================= -->
+    <section class="py-16 bg-[#FAFAF9] border-t border-slate-100">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-12">
+          <span class="text-xs font-bold tracking-widest text-emerald-700 uppercase bg-emerald-100 px-3 py-1 rounded-full">Tanya Jawab</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-heading mt-2">Pertanyaan yang Sering Diajukan</h2>
+        </div>
+
+        <div class="space-y-4">
+          <div class="p-5 rounded-2xl bg-white border border-slate-200">
+            <h3 class="text-sm font-bold text-slate-900 mb-1.5 flex items-center gap-2">
+              <i class="fa-solid fa-circle-question text-emerald-600"></i>
+              <span>Apakah estimasi harga di kalkulator sama persis dengan yang saya terima?</span>
+            </h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Harga di kalkulator adalah estimasi rata-rata pasar daur ulang terkini. Harga final dapat memiliki selisih wajar tergantung pada kebersihan sampah dan kebijakan masing-masing unit bank sampah mitra.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white border border-slate-200">
+            <h3 class="text-sm font-bold text-slate-900 mb-1.5 flex items-center gap-2">
+              <i class="fa-solid fa-circle-question text-emerald-600"></i>
+              <span>Bagaimana cara mendaftarkan bank sampah RT/RW kami ke SetorIn?</span>
+            </h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Kamu cukup beralih ke tab <strong>"Usulkan Bank Sampah"</strong> di formulir atas, isi data nama pengelola, alamat, dan nomor WhatsApp. Tim kurasi kami akan menghubungi PIC untuk proses verifikasi.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white border border-slate-200">
+            <h3 class="text-sm font-bold text-slate-900 mb-1.5 flex items-center gap-2">
+              <i class="fa-solid fa-circle-question text-emerald-600"></i>
+              <span>Apakah ada biaya untuk menggunakan platform SetorIn?</span>
+            </h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              100% gratis! SetorIn dikembangkan sebagai inisiatif publik ramah lingkungan dalam ajang Lomba Web Design Techno Versary Vol. II untuk mendukung pencapaian Sustainable Development Goals (SDGs).
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       FOOTER
+       ========================================================================= -->
+  <footer class="bg-[#14261C] text-slate-300 pt-16 pb-12 border-t border-emerald-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
+        
+        <div class="lg:col-span-2 space-y-4">
+          <a href="index.html" class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-lg">
+              <i class="fa-solid fa-recycle"></i>
+            </div>
+            <span class="text-2xl font-extrabold text-white font-heading">Setor<span class="text-emerald-400">In</span></span>
+          </a>
+          <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
+            Platform web bank sampah digital yang mengintegrasikan edukasi pemilahan sampah dari rumah, transparansi estimasi nilai ekonomi, dan peta lokasi bank sampah terdekat untuk mewujudkan ekonomi sirkular ramah lingkungan.
+          </p>
+          <div class="pt-2 text-xs text-emerald-400 font-semibold space-y-1">
+            <p><i class="fa-solid fa-award mr-1.5"></i> Lomba Web Design Techno Versary Vol. II</p>
+            <p><i class="fa-solid fa-users mr-1.5"></i> Tim: <strong>Eh Ada Wargalab</strong></p>
+            <p><i class="fa-solid fa-seedling mr-1.5"></i> Subtema 5: <strong>EcoDigital For Environment</strong></p>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4 font-heading">Halaman</h4>
+          <ul class="space-y-2.5 text-xs text-slate-400">
+            <li><a href="index.html" class="hover:text-emerald-400 transition">Beranda</a></li>
+            <li><a href="fitur.html" class="hover:text-emerald-400 transition">Fitur Utama (Kalkulator & Peta)</a></li>
+            <li><a href="konten.html" class="hover:text-emerald-400 transition">Panduan & Edukasi Pilah</a></li>
+            <li><a href="about.html" class="hover:text-emerald-400 transition">Tentang Kami & Profil Tim</a></li>
+            <li><a href="contact.html" class="hover:text-emerald-400 transition">Kontak & Usulan Lokasi</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4 font-heading">Komoditas Daur Ulang</h4>
+          <ul class="space-y-2.5 text-xs text-slate-400">
+            <li><span class="hover:text-emerald-400 transition cursor-pointer">Botol Plastik PET</span></li>
+            <li><span class="hover:text-emerald-400 transition cursor-pointer">Kardus & Karton Box</span></li>
+            <li><span class="hover:text-emerald-400 transition cursor-pointer">Kaleng Aluminium & Besi</span></li>
+            <li><span class="hover:text-emerald-400 transition cursor-pointer">Minyak Jelantah (Biodiesel)</span></li>
+            <li><span class="hover:text-emerald-400 transition cursor-pointer">E-Waste / Limbah Elektronik</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4 font-heading">Kabar Lingkungan</h4>
+          <p class="text-xs text-slate-400 leading-relaxed mb-3">
+            Dapatkan tips mingguan pengurangan sampah dan kabar harga daur ulang terbaru.
+          </p>
+          <form class="newsletter-form space-y-2">
+            <input type="email" required placeholder="Masukkan email kamu..." class="w-full px-3 py-2 text-xs rounded-lg bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500">
+            <button type="submit" class="w-full py-2 bg-emerald-700 hover:bg-emerald-600 text-white rounded-lg text-xs font-bold transition">
+              Langganan Buletin
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        <p>© 2026 SetorIn. Karya untuk Lomba Web Design Techno Versary Vol. II oleh Tim <strong>Eh Ada Wargalab</strong>.</p>
+        <div class="flex items-center gap-4">
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition" aria-label="GitHub Repository"><i class="fa-brands fa-github text-base"></i></a>
+          <a href="#" class="hover:text-emerald-400 transition" aria-label="Instagram"><i class="fa-brands fa-instagram text-base"></i></a>
+          <a href="#" class="hover:text-emerald-400 transition" aria-label="YouTube"><i class="fa-brands fa-youtube text-base"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Tab switching logic for contact.html
+    const tabBtnContact = document.getElementById('tab-btn-contact');
+    const tabBtnUsul = document.getElementById('tab-btn-usul');
+    const formContact = document.getElementById('form-contact');
+    const formUsul = document.getElementById('form-usul');
+
+    tabBtnContact?.addEventListener('click', () => {
+      tabBtnContact.className = 'flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold text-emerald-800 bg-white shadow-sm transition-all flex items-center justify-center gap-2';
+      tabBtnUsul.className = 'flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 transition-all flex items-center justify-center gap-2';
+      formContact.classList.remove('hidden');
+      formUsul.classList.add('hidden');
+    });
+
+    tabBtnUsul?.addEventListener('click', () => {
+      tabBtnUsul.className = 'flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold text-emerald-800 bg-white shadow-sm transition-all flex items-center justify-center gap-2';
+      tabBtnContact.className = 'flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 transition-all flex items-center justify-center gap-2';
+      formUsul.classList.remove('hidden');
+      formContact.classList.add('hidden');
+    });
+
+    // Form submit handlers
+    formContact?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nama = document.getElementById('nama-kontak').value;
+      showToast(`Pesan kamu berhasil dikirimkan, <b>${nama}</b>! Tim kami akan segera menghubungi balik.`, 'success', 4500);
+      formContact.reset();
+    });
+
+    formUsul?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const namaBS = document.getElementById('nama-bs').value;
+      showToast(`Usulan <b>${namaBS}</b> telah diterima untuk proses verifikasi. Terima kasih atas partisipasimu!`, 'success', 5000);
+      formUsul.reset();
+    });
+  </script>
+</body>
+</html>
