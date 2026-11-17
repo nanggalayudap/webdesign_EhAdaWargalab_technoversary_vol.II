@@ -1,7 +1,6 @@
 /**
  * SetorIn - Kalkulator Nilai Sampah & Dampak Lingkungan
- * Lomba Web Design Techno Versary Vol. II
- * Tim: Eh Ada Wargalab
+ * Sistem Perhitungan Resmi SetorIn
  */
 
 // Fallback dataset in case of local file:// CORS restrictions
@@ -170,14 +169,14 @@ function renderCatalogSelector() {
   if (!selectEl) return;
 
   selectEl.innerHTML = '<option value="">-- Pilih Jenis Sampah yang Mau Disetor --</option>';
-  
+
   // Group by category
   const categories = [...new Set(wasteCatalog.map(item => item.kategori))];
-  
+
   categories.forEach(cat => {
     const optgroup = document.createElement('optgroup');
     optgroup.label = `Kategori: ${cat}`;
-    
+
     wasteCatalog.filter(item => item.kategori === cat).forEach(item => {
       const opt = document.createElement('option');
       opt.value = item.id;
@@ -191,7 +190,7 @@ function renderCatalogSelector() {
   // When select changes, update unit label
   const unitLabel = document.getElementById('calc-unit-label');
   const quickTips = document.getElementById('calc-quick-tips');
-  
+
   selectEl.addEventListener('change', () => {
     const selectedItem = wasteCatalog.find(i => i.id === selectEl.value);
     if (selectedItem) {
@@ -209,7 +208,7 @@ function renderCatalogSelector() {
   // Add Item Button
   const addBtn = document.getElementById('btn-add-item');
   const amountInput = document.getElementById('calc-item-amount');
-  
+
   if (addBtn) {
     addBtn.onclick = () => {
       const selectedId = selectEl.value;
@@ -339,7 +338,7 @@ function recalculateTotals() {
   const totalBeratEl = document.getElementById('calc-total-berat');
   const totalEmisiEl = document.getElementById('calc-total-emisi');
   const totalTPAEl = document.getElementById('calc-total-tpa');
-  
+
   // Real life equivalents
   const eqLedEl = document.getElementById('calc-eq-led');
   const eqMotorEl = document.getElementById('calc-eq-motor');
@@ -373,7 +372,7 @@ function setupPresetHandlers() {
     ];
     renderBasketTable();
     recalculateTotals();
-    window.showToast?.('Preset "Anak Kos / Mahasiswa" berhasil dimuat!', 'success');
+    window.showToast?.('Preset Rumah Tangga Kecil berhasil dimuat.', 'success');
   });
 
   presetKeluarga?.addEventListener('click', () => {
@@ -386,7 +385,7 @@ function setupPresetHandlers() {
     ];
     renderBasketTable();
     recalculateTotals();
-    window.showToast?.('Preset "Rumah Tangga Bulanan" berhasil dimuat!', 'success');
+    window.showToast?.('Preset Rumah Tangga Menengah berhasil dimuat.', 'success');
   });
 
   presetKantor?.addEventListener('click', () => {
@@ -398,7 +397,7 @@ function setupPresetHandlers() {
     ];
     renderBasketTable();
     recalculateTotals();
-    window.showToast?.('Preset "Kantor & Arsip Sekolah" berhasil dimuat!', 'success');
+    window.showToast?.('Preset Perkantoran & Komersial berhasil dimuat.', 'success');
   });
 }
 
@@ -406,3 +405,4 @@ function setupPresetHandlers() {
 window.updateBasketItem = updateBasketItem;
 window.removeBasketItem = removeBasketItem;
 window.clearBasket = clearBasket;
+

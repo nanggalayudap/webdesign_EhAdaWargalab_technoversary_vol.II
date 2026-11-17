@@ -1,7 +1,6 @@
 /**
- * SetorIn - Main JavaScript
- * Lomba Web Design Techno Versary Vol. II
- * Tim: Eh Ada Wargalab
+ * SetorIn - Main Script
+ * PT Setor Inovasi Nusantara
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -174,3 +173,4 @@ function initNewsletter() {
     });
   });
 }
+

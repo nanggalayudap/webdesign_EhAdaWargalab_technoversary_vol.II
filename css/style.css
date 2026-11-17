@@ -1,8 +1,6 @@
 /* ==========================================================================
-   SetorIn (Bank Sampah Digital) - Main Stylesheet
-   Lomba Web Design Techno Versary Vol. II
-   Tim: Eh Ada Wargalab
-   Tema: EcoDigital For Environment
+   SetorIn - Main Stylesheet
+   PT Setor Inovasi Nusantara
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
@@ -221,3 +219,4 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   outline: 2px solid var(--color-secondary);
   outline-offset: 2px;
 }
+

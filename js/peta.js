@@ -1,7 +1,6 @@
 /**
- * SetorIn - Peta Interaktif Bank Sampah (Leaflet.js + OpenStreetMap)
- * Lomba Web Design Techno Versary Vol. II
- * Tim: Eh Ada Wargalab
+ * SetorIn - Peta Digital Lokasi Bank Sampah
+ * Jaringan Kemitraan Resmi SetorIn
  */
 
 const FALLBACK_LOKASI_BANK_SAMPAH = [
@@ -423,3 +422,4 @@ function setupMapFilterEvents() {
 }
 
 window.focusOnLocation = focusOnLocation;
+
