@@ -1,9 +1,3 @@
-/**
- * SetorIn - Kalkulator Nilai Sampah & Dampak Lingkungan
- * Sistem Perhitungan Resmi SetorIn
- */
-
-// Fallback dataset in case of local file:// CORS restrictions
 const FALLBACK_HARGA_SAMPAH = [
   {
     "id": "plastik-pet",
@@ -126,22 +120,17 @@ const FALLBACK_HARGA_SAMPAH = [
     "faktorTPA": 0.0016
   }
 ];
-
 let wasteCatalog = [];
 let userBasket = [
   { id: 'plastik-pet', jumlah: 3.5 },
   { id: 'kardus', jumlah: 6.0 }
 ];
-
 document.addEventListener('DOMContentLoaded', () => {
   initWasteCalculator();
 });
-
 async function initWasteCalculator() {
   const calcContainer = document.getElementById('calculator-app');
   if (!calcContainer) return;
-
-  // Attempt to fetch from data/harga-sampah.json, fallback gracefully
   try {
     const res = await fetch('data/harga-sampah.json');
     if (res.ok) {
@@ -153,44 +142,32 @@ async function initWasteCalculator() {
     console.info('Using fallback waste price catalog for offline/local protocol.');
     wasteCatalog = FALLBACK_HARGA_SAMPAH;
   }
-
   renderCalculatorInterface();
   setupPresetHandlers();
 }
-
 function renderCalculatorInterface() {
   renderCatalogSelector();
   renderBasketTable();
   recalculateTotals();
 }
-
 function renderCatalogSelector() {
   const selectEl = document.getElementById('calc-item-select');
   if (!selectEl) return;
-
   selectEl.innerHTML = '<option value="">-- Pilih Jenis Sampah yang Mau Disetor --</option>';
-
-  // Group by category
   const categories = [...new Set(wasteCatalog.map(item => item.kategori))];
-
   categories.forEach(cat => {
     const optgroup = document.createElement('optgroup');
     optgroup.label = `Kategori: ${cat}`;
-
     wasteCatalog.filter(item => item.kategori === cat).forEach(item => {
       const opt = document.createElement('option');
       opt.value = item.id;
       opt.textContent = `${item.nama} — Rp ${item.hargaPerSatuan.toLocaleString('id-ID')} / ${item.satuan}`;
       optgroup.appendChild(opt);
     });
-
     selectEl.appendChild(optgroup);
   });
-
-  // When select changes, update unit label
   const unitLabel = document.getElementById('calc-unit-label');
   const quickTips = document.getElementById('calc-quick-tips');
-
   selectEl.addEventListener('change', () => {
     const selectedItem = wasteCatalog.find(i => i.id === selectEl.value);
     if (selectedItem) {
@@ -204,62 +181,47 @@ function renderCatalogSelector() {
       if (quickTips) quickTips.classList.add('hidden');
     }
   });
-
-  // Add Item Button
   const addBtn = document.getElementById('btn-add-item');
   const amountInput = document.getElementById('calc-item-amount');
-
   if (addBtn) {
     addBtn.onclick = () => {
       const selectedId = selectEl.value;
       const amount = parseFloat(amountInput.value);
-
       if (!selectedId) {
         window.showToast?.('Silakan pilih jenis sampah terlebih dahulu!', 'warning');
         return;
       }
-
       if (isNaN(amount) || amount <= 0) {
         window.showToast?.('Masukkan jumlah/berat sampah yang valid (minimal 0.1)!', 'warning');
         return;
       }
-
       const existingIndex = userBasket.findIndex(b => b.id === selectedId);
       if (existingIndex > -1) {
         userBasket[existingIndex].jumlah += amount;
       } else {
         userBasket.push({ id: selectedId, jumlah: amount });
       }
-
       renderBasketTable();
       recalculateTotals();
       window.showToast?.('Sampah berhasil ditambahkan ke daftar estimasi!', 'success');
-
-      // Reset input
       amountInput.value = '1';
     };
   }
 }
-
 function renderBasketTable() {
   const basketList = document.getElementById('calc-basket-list');
   const emptyState = document.getElementById('calc-empty-basket');
   if (!basketList) return;
-
   if (userBasket.length === 0) {
     basketList.innerHTML = '';
     if (emptyState) emptyState.classList.remove('hidden');
     return;
   }
-
   if (emptyState) emptyState.classList.add('hidden');
-
   basketList.innerHTML = userBasket.map((item, index) => {
     const data = wasteCatalog.find(c => c.id === item.id) || FALLBACK_HARGA_SAMPAH.find(c => c.id === item.id);
     if (!data) return '';
-
     const subtotal = data.hargaPerSatuan * item.jumlah;
-
     return `
       <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-2xl bg-white border border-slate-200/80 shadow-sm gap-3 transition-all hover:border-emerald-300">
         <div class="flex items-center gap-3">
@@ -271,18 +233,15 @@ function renderBasketTable() {
             <p class="text-[11px] text-slate-500">Rp ${data.hargaPerSatuan.toLocaleString('id-ID')} / ${data.satuan}</p>
           </div>
         </div>
-
         <div class="flex items-center justify-between sm:justify-end gap-4 border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-100">
           <div class="flex items-center gap-1.5 bg-slate-100 rounded-lg p-1">
             <button class="w-6 h-6 rounded bg-white text-slate-700 hover:bg-emerald-600 hover:text-white text-xs font-bold transition flex items-center justify-center" onclick="updateBasketItem(${index}, -0.5)">-</button>
             <span class="w-12 text-center text-xs font-bold text-slate-800">${item.jumlah.toFixed(1)} ${data.satuan}</span>
             <button class="w-6 h-6 rounded bg-white text-slate-700 hover:bg-emerald-600 hover:text-white text-xs font-bold transition flex items-center justify-center" onclick="updateBasketItem(${index}, 0.5)">+</button>
           </div>
-
           <div class="text-right min-w-[90px]">
             <p class="text-xs sm:text-sm font-extrabold text-emerald-800 font-heading">Rp ${Math.round(subtotal).toLocaleString('id-ID')}</p>
           </div>
-
           <button class="text-slate-400 hover:text-rose-600 p-1.5 transition text-sm" onclick="removeBasketItem(${index})" title="Hapus item">
             <i class="fa-regular fa-trash-can"></i>
           </button>
@@ -291,7 +250,6 @@ function renderBasketTable() {
     `;
   }).join('');
 }
-
 function updateBasketItem(index, delta) {
   if (userBasket[index]) {
     userBasket[index].jumlah += delta;
@@ -302,27 +260,23 @@ function updateBasketItem(index, delta) {
     recalculateTotals();
   }
 }
-
 function removeBasketItem(index) {
   userBasket.splice(index, 1);
   renderBasketTable();
   recalculateTotals();
   window.showToast?.('Item telah dihapus dari kalkulator', 'info');
 }
-
 function clearBasket() {
   userBasket = [];
   renderBasketTable();
   recalculateTotals();
   window.showToast?.('Daftar kalkulator telah dikosongkan', 'info');
 }
-
 function recalculateTotals() {
   let totalRupiah = 0;
   let totalBerat = 0;
   let totalEmisi = 0;
   let totalTPA = 0;
-
   userBasket.forEach(b => {
     const data = wasteCatalog.find(c => c.id === b.id) || FALLBACK_HARGA_SAMPAH.find(c => c.id === b.id);
     if (data) {
@@ -332,37 +286,25 @@ function recalculateTotals() {
       totalTPA += (b.jumlah * (data.faktorTPA || 0.002));
     }
   });
-
-  // UI DOM updates
   const totalRupiahEl = document.getElementById('calc-total-rupiah');
   const totalBeratEl = document.getElementById('calc-total-berat');
   const totalEmisiEl = document.getElementById('calc-total-emisi');
   const totalTPAEl = document.getElementById('calc-total-tpa');
-
-  // Real life equivalents
   const eqLedEl = document.getElementById('calc-eq-led');
   const eqMotorEl = document.getElementById('calc-eq-motor');
   const eqPohonEl = document.getElementById('calc-eq-pohon');
-
   if (totalRupiahEl) totalRupiahEl.textContent = `Rp ${Math.round(totalRupiah).toLocaleString('id-ID')}`;
   if (totalBeratEl) totalBeratEl.textContent = `${totalBerat.toFixed(1)} kg`;
   if (totalEmisiEl) totalEmisiEl.textContent = `${totalEmisi.toFixed(1)} kg`;
   if (totalTPAEl) totalTPAEl.textContent = `${(totalTPA * 1000).toFixed(0)} Liter`;
-
-  // Equivalents logic
-  // 1 kg CO2 reduction ~ 8 jam nyala lampu LED 10W
-  // 1 kg CO2 reduction ~ 4.2 km berkendara motor listrik
-  // 15 kg CO2 reduction ~ 1 pohon menyerap emisi selama setahun
   if (eqLedEl) eqLedEl.textContent = `${Math.round(totalEmisi * 8)} Jam`;
   if (eqMotorEl) eqMotorEl.textContent = `${Math.round(totalEmisi * 4.2)} Km`;
   if (eqPohonEl) eqPohonEl.textContent = `${(totalEmisi / 15).toFixed(2)} Pohon / Thn`;
 }
-
 function setupPresetHandlers() {
   const presetMahasiswa = document.getElementById('preset-mahasiswa');
   const presetKeluarga = document.getElementById('preset-keluarga');
   const presetKantor = document.getElementById('preset-kantor');
-
   presetMahasiswa?.addEventListener('click', () => {
     userBasket = [
       { id: 'plastik-pet', jumlah: 4.0 },
@@ -374,7 +316,6 @@ function setupPresetHandlers() {
     recalculateTotals();
     window.showToast?.('Preset Rumah Tangga Kecil berhasil dimuat.', 'success');
   });
-
   presetKeluarga?.addEventListener('click', () => {
     userBasket = [
       { id: 'plastik-pet', jumlah: 8.0 },
@@ -387,7 +328,6 @@ function setupPresetHandlers() {
     recalculateTotals();
     window.showToast?.('Preset Rumah Tangga Menengah berhasil dimuat.', 'success');
   });
-
   presetKantor?.addEventListener('click', () => {
     userBasket = [
       { id: 'kertas-hvs', jumlah: 25.0 },
@@ -400,9 +340,6 @@ function setupPresetHandlers() {
     window.showToast?.('Preset Perkantoran & Komersial berhasil dimuat.', 'success');
   });
 }
-
-// Expose functions to window
 window.updateBasketItem = updateBasketItem;
 window.removeBasketItem = removeBasketItem;
 window.clearBasket = clearBasket;
-

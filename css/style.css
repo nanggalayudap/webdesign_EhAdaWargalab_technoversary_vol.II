@@ -1,40 +1,28 @@
-/* ==========================================================================
-   SetorIn - Main Stylesheet
-   PT Setor Inovasi Nusantara
-   ========================================================================== */
-
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
-
 :root {
-  --color-primary: #15803D;        /* Emerald Forest */
-  --color-primary-hover: #166534;  /* Deep Pine */
-  --color-secondary: #22C55E;      /* Fresh Leaf */
-  --color-surface: #F0FDF4;        /* Mint Mist */
-  --color-bg: #FAFAF9;             /* Clean Ivory */
-  --color-text-primary: #14261C;   /* Charcoal Moss */
-  --color-text-muted: #4B6356;     /* Sage Gray */
+  --color-primary: #15803D;
+  --color-primary-hover: #166534;
+  --color-secondary: #22C55E;
+  --color-surface: #F0FDF4;
+  --color-bg: #FAFAF9;
+  --color-text-primary: #14261C;
+  --color-text-muted: #4B6356;
   --color-border: #E2E8F0;
   --color-border-accent: #BBF7D0;
-  
   --shadow-sm: 0 1px 2px 0 rgb(20 38 28 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(20 38 28 / 0.08), 0 2px 4px -2px rgb(20 38 28 / 0.05);
   --shadow-lg: 0 10px 15px -3px rgb(20 38 28 / 0.08), 0 4px 6px -4px rgb(20 38 28 / 0.05);
   --shadow-xl: 0 20px 25px -5px rgb(20 38 28 / 0.1), 0 8px 10px -6px rgb(20 38 28 / 0.06);
 }
-
-/* Base Reset & Typography */
 html {
   scroll-behavior: smooth;
   font-family: 'Plus Jakarta Sans', sans-serif;
   color: var(--color-text-primary);
   background-color: var(--color-bg);
 }
-
 h1, h2, h3, h4, .font-heading {
   font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
 }
-
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -48,47 +36,34 @@ h1, h2, h3, h4, .font-heading {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-primary);
 }
-
-/* Eco-Themed Utilities & Badges */
 .bg-mint {
   background-color: var(--color-surface);
 }
-
 .text-charcoal {
   color: var(--color-text-primary);
 }
-
 .text-sage {
   color: var(--color-text-muted);
 }
-
 .border-eco {
   border-color: var(--color-border-accent);
 }
-
 .gradient-eco {
   background: linear-gradient(135deg, #15803D 0%, #166534 60%, #14532D 100%);
 }
-
 .gradient-eco-light {
   background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
 }
-
 .gradient-hero {
   background: radial-gradient(circle at 15% 20%, rgba(34, 197, 94, 0.12) 0%, transparent 40%),
               radial-gradient(circle at 85% 75%, rgba(21, 128, 61, 0.1) 0%, transparent 50%),
               #FAFAF9;
 }
-
-/* Leaf Pattern Subtle Overlay */
 .bg-eco-pattern {
   background-image: radial-gradient(#22c55e 0.75px, transparent 0.75px), radial-gradient(#15803d 0.75px, #FAFAF9 0.75px);
   background-size: 30px 30px;
   background-position: 0 0, 15px 15px;
-  background-opacity: 0.05;
 }
-
-/* Card Hover Elevation */
 .card-hover {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -96,8 +71,6 @@ h1, h2, h3, h4, .font-heading {
   transform: translateY(-4px);
   box-shadow: 0 16px 24px -6px rgba(21, 128, 61, 0.12), 0 6px 12px -4px rgba(21, 128, 61, 0.08);
 }
-
-/* Navbar active item indicator */
 .nav-link {
   position: relative;
   transition: color 0.2s ease;
@@ -122,8 +95,6 @@ h1, h2, h3, h4, .font-heading {
   color: var(--color-primary);
   font-weight: 600;
 }
-
-/* Floating Animation */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-8px); }
@@ -131,7 +102,6 @@ h1, h2, h3, h4, .font-heading {
 .animate-float {
   animation: float 4s ease-in-out infinite;
 }
-
 @keyframes pulse-soft {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.85; transform: scale(1.02); }
@@ -139,8 +109,6 @@ h1, h2, h3, h4, .font-heading {
 .animate-pulse-soft {
   animation: pulse-soft 3s ease-in-out infinite;
 }
-
-/* Leaflet Map Specific Overrides */
 #map {
   height: 520px;
   width: 100%;
@@ -175,8 +143,6 @@ h1, h2, h3, h4, .font-heading {
   transform: scale(1.15);
   background: #166534;
 }
-
-/* Custom Toast Notification */
 #toast-container {
   position: fixed;
   bottom: 1.5rem;
@@ -197,8 +163,6 @@ h1, h2, h3, h4, .font-heading {
   transform: translateY(0);
   opacity: 1;
 }
-
-/* Form Styles */
 .form-input {
   width: 100%;
   padding: 0.75rem 1rem;
@@ -213,10 +177,35 @@ h1, h2, h3, h4, .font-heading {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
 }
-
-/* Accessible focus ring */
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
   outline: 2px solid var(--color-secondary);
   outline-offset: 2px;
 }
 
+
+*, *::before, *::after { box-sizing: border-box; }
+html { width: 100%; max-width: 100%; overflow-x: clip; -webkit-text-size-adjust: 100%; }
+body { width: 100%; min-width: 320px; margin: 0; overflow-x: hidden; }
+img, video, canvas, iframe, svg { max-width: 100%; }
+img, video { height: auto; }
+input, select, textarea, button { max-width: 100%; font: inherit; }
+input, select, textarea { min-width: 0; }
+#map { width: 100%; min-height: 280px; height: clamp(300px, 52vw, 520px); overflow: hidden; }
+.leaflet-container { width: 100%; font-family: 'Plus Jakarta Sans', sans-serif; }
+.leaflet-popup-content { max-width: min(260px, calc(100vw - 72px)); overflow-wrap: anywhere; }
+#toast-container { right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom)); left: auto; width: min(24rem, calc(100vw - 2rem)); }
+.toast { width: 100%; overflow-wrap: anywhere; }
+@media (max-width: 768px) {
+  #map { height: 380px; }
+  .leaflet-control-attribution { font-size: 9px; }
+  .card-hover:hover { transform: none; }
+}
+@media (max-width: 480px) {
+  #map { height: 320px; min-height: 280px; }
+  #toast-container { right: 0.75rem; bottom: max(0.75rem, env(safe-area-inset-bottom)); width: calc(100vw - 1.5rem); }
+  .leaflet-popup-content { margin: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}

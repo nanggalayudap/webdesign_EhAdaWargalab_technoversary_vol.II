@@ -1,8 +1,3 @@
-/**
- * SetorIn - Main Script
- * PT Setor Inovasi Nusantara
- */
-
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initBackToTop();
@@ -10,16 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initActiveNav();
   initNewsletter();
 });
-
-/* ==========================================================================
-   1. Navbar & Mobile Drawer
-   ========================================================================== */
 function initNavbar() {
   const navbar = document.getElementById('navbar');
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
-
-  // Sticky navbar shadow on scroll
   window.addEventListener('scroll', () => {
     if (window.scrollY > 20) {
       navbar?.classList.add('shadow-md', 'bg-white/95', 'backdrop-blur-md');
@@ -29,15 +18,11 @@ function initNavbar() {
       navbar?.classList.add('bg-white');
     }
   });
-
-  // Mobile menu toggle
   if (mobileMenuBtn && mobileMenu) {
     mobileMenuBtn.addEventListener('click', () => {
       const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
       mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
       mobileMenu.classList.toggle('hidden');
-
-      // Change icon
       const icon = mobileMenuBtn.querySelector('i');
       if (icon) {
         if (!isExpanded) {
@@ -47,8 +32,6 @@ function initNavbar() {
         }
       }
     });
-
-    // Close menu when clicking links
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
@@ -59,14 +42,9 @@ function initNavbar() {
     });
   }
 }
-
-/* ==========================================================================
-   2. Active Nav Link Detection
-   ========================================================================== */
 function initActiveNav() {
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
   const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
-
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
     if (href === currentPath || (currentPath === '' && href === 'index.html')) {
@@ -75,10 +53,6 @@ function initActiveNav() {
     }
   });
 }
-
-/* ==========================================================================
-   3. Back to Top Button
-   ========================================================================== */
 function initBackToTop() {
   let bttBtn = document.getElementById('back-to-top');
   if (!bttBtn) {
@@ -89,7 +63,6 @@ function initBackToTop() {
     bttBtn.innerHTML = '<i class="fa-solid fa-arrow-up text-lg"></i>';
     document.body.appendChild(bttBtn);
   }
-
   window.addEventListener('scroll', () => {
     if (window.scrollY > 400) {
       bttBtn.classList.remove('opacity-0', 'pointer-events-none');
@@ -99,15 +72,10 @@ function initBackToTop() {
       bttBtn.classList.remove('opacity-100');
     }
   });
-
   bttBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
-
-/* ==========================================================================
-   4. Custom Toast Notification
-   ========================================================================== */
 function initToastContainer() {
   if (!document.getElementById('toast-container')) {
     const container = document.createElement('div');
@@ -115,51 +83,52 @@ function initToastContainer() {
     document.body.appendChild(container);
   }
 }
-
 function showToast(message, type = 'success', duration = 3500) {
   const container = document.getElementById('toast-container') || document.body;
-  
   const toast = document.createElement('div');
-  const icon = type === 'success' 
-    ? 'fa-circle-check text-emerald-500' 
-    : type === 'warning' 
-    ? 'fa-triangle-exclamation text-amber-500' 
+  const icon = type === 'success'
+    ? 'fa-circle-check text-emerald-500'
+    : type === 'warning'
+    ? 'fa-triangle-exclamation text-amber-500'
     : 'fa-circle-info text-blue-500';
-  
-  const border = type === 'success' 
-    ? 'border-emerald-200 bg-white' 
-    : type === 'warning' 
-    ? 'border-amber-200 bg-white' 
+  const border = type === 'success'
+    ? 'border-emerald-200 bg-white'
+    : type === 'warning'
+    ? 'border-amber-200 bg-white'
     : 'border-blue-200 bg-white';
-
   toast.className = `toast max-w-sm flex items-start gap-3 p-4 rounded-xl border shadow-xl ${border} text-slate-800 text-sm font-medium z-50`;
   toast.innerHTML = `
-    <i class="fa-solid ${icon} text-lg mt-0.5"></i>
-    <div class="flex-1 pr-2">${message}</div>
-    <button class="text-slate-400 hover:text-slate-600 focus:outline-none" onclick="this.parentElement.remove()">
-      <i class="fa-solid fa-xmark"></i>
+    <i class="fa-solid ${icon} text-lg mt-0.5" aria-hidden="true"></i>
+    <div class="toast-message flex-1 pr-2"></div>
+    <button type="button" class="toast-close text-slate-400 hover:text-slate-600 focus:outline-none" aria-label="Tutup notifikasi">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
   `;
 
-  container.appendChild(toast);
+  const messageNode = toast.querySelector('.toast-message');
+  let boldNode = null;
+  String(message).split(/(<\/?b>)/gi).forEach(part => {
+    if (/^<b>$/i.test(part)) {
+      boldNode = document.createElement('strong');
+      messageNode.appendChild(boldNode);
+    } else if (/^<\/b>$/i.test(part)) {
+      boldNode = null;
+    } else if (part) {
+      (boldNode || messageNode).appendChild(document.createTextNode(part));
+    }
+  });
 
-  // Trigger animation
+  toast.querySelector('.toast-close').addEventListener('click', () => toast.remove());
+  container.appendChild(toast);
   requestAnimationFrame(() => {
     toast.classList.add('show');
   });
-
   setTimeout(() => {
     toast.classList.remove('show');
     setTimeout(() => toast.remove(), 300);
   }, duration);
 }
-
-// Expose globally
 window.showToast = showToast;
-
-/* ==========================================================================
-   5. Newsletter Form Simulation
-   ========================================================================== */
 function initNewsletter() {
   const forms = document.querySelectorAll('.newsletter-form');
   forms.forEach(form => {
@@ -173,4 +142,3 @@ function initNewsletter() {
     });
   });
 }
-

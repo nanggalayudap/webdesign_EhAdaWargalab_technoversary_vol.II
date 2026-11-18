@@ -8,8 +8,7 @@
   <meta name="author" content="PT Setor Inovasi Nusantara">
   <meta name="theme-color" content="#15803D">
   <link rel="icon" type="image/png" href="assets/icons/logoNoBG.png">
-
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com/"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -30,25 +29,14 @@
       }
     }
   </script>
-
-  <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
-  <!-- Leaflet.js CSS CDN -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-
-  <!-- Custom Styles -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-[#FAFAF9] text-[#14261C] flex flex-col min-h-screen selection:bg-emerald-200 selection:text-emerald-900">
-
-  <!-- =========================================================================
-       HEADER / NAVBAR
-       ========================================================================= -->
   <header id="navbar" class="sticky top-0 z-50 bg-white transition-all duration-300 border-b border-slate-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
-        
         <a href="index.html" class="flex items-center gap-3 group">
           <div class="w-11 h-11 rounded-2xl bg-emerald-50 border border-emerald-100/80 flex items-center justify-center p-1.5 shadow-sm group-hover:scale-105 group-hover:shadow-md transition-all">
             <img src="assets/icons/logoNoBG.png" alt="Logo SetorIn" class="w-full h-full object-contain">
@@ -60,7 +48,6 @@
             <p class="text-xs text-slate-500 font-medium">Bank Sampah Digital</p>
           </div>
         </a>
-
         <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
           <a href="index.html" class="nav-link text-slate-600 hover:text-emerald-700 transition">Beranda</a>
           <a href="fitur.html" class="nav-link text-slate-600 hover:text-emerald-700 transition">Fitur Utama</a>
@@ -68,7 +55,6 @@
           <a href="about.html" class="nav-link text-slate-600 hover:text-emerald-700 transition">Tentang Kami</a>
           <a href="contact.html" class="nav-link text-slate-600 hover:text-emerald-700 transition">Kontak</a>
         </nav>
-
         <div class="hidden lg:flex items-center gap-3">
           <a href="#kalkulator" class="px-5 py-2.5 rounded-xl font-semibold text-sm text-white bg-emerald-700 hover:bg-emerald-800 shadow-md shadow-emerald-700/20 transition-all hover:-translate-y-0.5 flex items-center gap-2">
             <span>Kalkulator</span>
@@ -77,7 +63,6 @@
             <span>Peta</span>
           </a>
         </div>
-
         <div class="flex md:hidden">
           <button id="mobile-menu-btn" type="button" aria-expanded="false" aria-label="Buka navigasi menu" class="p-2.5 rounded-xl text-slate-700 hover:text-emerald-700 hover:bg-slate-100 focus:outline-none">
             <i class="fa-solid fa-bars text-2xl"></i>
@@ -85,7 +70,6 @@
         </div>
       </div>
     </div>
-
     <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 space-y-2 shadow-xl">
       <a href="index.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Beranda</a>
       <a href="fitur.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Fitur Utama (Kalkulator & Peta)</a>
@@ -94,12 +78,7 @@
       <a href="contact.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Kontak & Usulan Lokasi</a>
     </div>
   </header>
-
   <main class="flex-grow">
-    
-    <!-- =========================================================================
-         PAGE HERO BANNER & QUICK JUMP
-         ========================================================================= -->
     <section class="gradient-hero py-14 border-b border-emerald-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold mb-3">
@@ -110,8 +89,6 @@
         <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed mb-6">
           Dua instrumen digital utama untuk mempermudah gaya hidup minim sampah. Hitung nilai ekonomis sampahmu hari ini dan tentukan lokasi setor terdekat secara cepat.
         </p>
-
-        <!-- Quick Section Jumps -->
         <div class="flex items-center justify-center gap-3">
           <a href="#kalkulator" class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-emerald-700 text-white hover:bg-emerald-800 shadow-md transition flex items-center gap-2">
             <i class="fa-solid fa-calculator"></i>
@@ -124,29 +101,17 @@
         </div>
       </div>
     </section>
-
-
-    <!-- =========================================================================
-         BAGIAN 1: KALKULATOR NILAI SAMPAH & DAMPAK LINGKUNGAN
-         ========================================================================= -->
     <section id="kalkulator" class="py-20 bg-white border-b border-slate-100">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
           <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">Kalkulator Nilai Sampah & Jejak Karbon</h2>
           <p class="text-sm text-slate-600">
             Pilih komoditas sampah daur ulang, tentukan berat atau volumenya, dan lihat ringkasan estimasi tabungan rupiah serta kontribusi nyata bagi bumi.
           </p>
         </div>
-
         <div id="calculator-app" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
-          <!-- Sisi Kiri: Form Input & Keranjang Sampah -->
           <div class="lg:col-span-7 space-y-6">
-            
-            <!-- Card Input Sampah -->
             <div class="p-6 sm:p-7 rounded-3xl bg-[#FAFAF9] border border-slate-200/80 shadow-sm space-y-5">
-              
               <div class="flex items-center justify-between pb-3 border-b border-slate-200/80">
                 <div class="flex items-center gap-2.5">
                   <span class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center text-sm font-bold">
@@ -156,8 +121,6 @@
                 </div>
                 <span class="text-xs text-slate-400">10 Komoditas Tersedia</span>
               </div>
-
-              <!-- Input Dropdown & Stepper -->
               <div class="space-y-4">
                 <div>
                   <label for="calc-item-select" class="block text-xs font-bold text-slate-700 mb-1.5">Pilih Kategori Sampah</label>
@@ -165,7 +128,6 @@
                     <option value="">Memuat data harga sampah...</option>
                   </select>
                 </div>
-
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
                   <div>
                     <label for="calc-item-amount" class="block text-xs font-bold text-slate-700 mb-1.5">
@@ -176,18 +138,13 @@
                       <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 pointer-events-none">qty</span>
                     </div>
                   </div>
-
                   <button id="btn-add-item" type="button" class="w-full py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-emerald-700 hover:bg-emerald-800 shadow-md shadow-emerald-700/20 transition flex items-center justify-center gap-2">
                     <i class="fa-solid fa-cart-plus"></i>
                     <span>Masukkan ke Daftar</span>
                   </button>
                 </div>
-
-                <!-- Tips Pemilahan Dinamis -->
                 <div id="calc-quick-tips" class="hidden p-3.5 rounded-xl bg-amber-50/80 border border-amber-200/80 text-xs text-amber-900 leading-relaxed"></div>
               </div>
-
-              <!-- Presets Cepat -->
               <div class="pt-2 border-t border-slate-200/60">
                 <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">Simulasi Cepat (Preset Sekali Klik):</p>
                 <div class="flex flex-wrap gap-2">
@@ -202,10 +159,7 @@
                   </button>
                 </div>
               </div>
-
             </div>
-
-            <!-- Keranjang / Daftar Item Terpilih -->
             <div class="p-6 sm:p-7 rounded-3xl bg-[#FAFAF9] border border-slate-200/80 shadow-sm space-y-4">
               <div class="flex items-center justify-between">
                 <h3 class="text-sm sm:text-base font-bold text-slate-900 font-heading flex items-center gap-2">
@@ -216,28 +170,17 @@
                   <i class="fa-regular fa-trash-can mr-1"></i> Kosongkan
                 </button>
               </div>
-
-              <!-- Dynamic Items List Container -->
               <div id="calc-basket-list" class="space-y-2.5"></div>
-
-              <!-- Empty State -->
               <div id="calc-empty-basket" class="hidden text-center py-8 px-4 rounded-2xl bg-white border border-dashed border-slate-200">
                 <i class="fa-solid fa-basket-shopping text-3xl text-slate-300 mb-2"></i>
                 <p class="text-xs font-bold text-slate-700">Daftar masih kosong</p>
                 <p class="text-[11px] text-slate-500">Pilih jenis sampah di atas atau gunakan tombol simulasi cepat.</p>
               </div>
             </div>
-
           </div>
-
-          <!-- Sisi Kanan: Ringkasan Nilai & Dampak Lingkungan -->
           <div class="lg:col-span-5 space-y-6">
-            
             <div class="rounded-3xl gradient-eco text-white p-6 sm:p-8 shadow-xl relative overflow-hidden space-y-6">
-              
-              <!-- Subtle Background Icon -->
               <i class="fa-solid fa-leaf text-white/5 text-9xl absolute -right-6 -bottom-6 pointer-events-none"></i>
-
               <div>
                 <span class="text-xs font-bold tracking-wider text-emerald-200 uppercase">Total Estimasi Nilai Ekonomi</span>
                 <div class="flex items-baseline gap-2 mt-1">
@@ -247,32 +190,25 @@
                   *Estimasi sebelum verifikasi timbangan petugas bank sampah.
                 </p>
               </div>
-
-              <!-- Metrics Grid -->
               <div class="grid grid-cols-3 gap-3 pt-4 border-t border-emerald-700/60">
                 <div class="p-3 rounded-xl bg-white/10 backdrop-blur-sm text-center">
                   <span class="text-[11px] text-emerald-200 block">Total Berat</span>
                   <strong id="calc-total-berat" class="text-base font-extrabold font-heading text-white">0.0 kg</strong>
                 </div>
-
                 <div class="p-3 rounded-xl bg-white/10 backdrop-blur-sm text-center">
                   <span class="text-[11px] text-emerald-200 block">Pencegahan CO₂</span>
                   <strong id="calc-total-emisi" class="text-base font-extrabold font-heading text-emerald-300">0.0 kg</strong>
                 </div>
-
                 <div class="p-3 rounded-xl bg-white/10 backdrop-blur-sm text-center">
                   <span class="text-[11px] text-emerald-200 block">Ruang TPA</span>
                   <strong id="calc-total-tpa" class="text-base font-extrabold font-heading text-white">0 Liter</strong>
                 </div>
               </div>
-
-              <!-- Ekuivalen Dampak Nyata -->
               <div class="p-4 rounded-2xl bg-black/20 backdrop-blur-sm space-y-3">
                 <p class="text-xs font-bold text-emerald-200 flex items-center gap-1.5">
                   <i class="fa-solid fa-earth-americas text-emerald-400"></i>
                   <span>Ekuivalen Dampak Lingkunganmu:</span>
                 </p>
-
                 <div class="space-y-2 text-xs">
                   <div class="flex items-center justify-between">
                     <span class="text-emerald-100 flex items-center gap-2">
@@ -280,14 +216,12 @@
                     </span>
                     <span id="calc-eq-led" class="font-bold text-white">0 Jam</span>
                   </div>
-
                   <div class="flex items-center justify-between">
                     <span class="text-emerald-100 flex items-center gap-2">
                       <i class="fa-solid fa-motorcycle text-cyan-300"></i> Berkendara Motor Listrik
                     </span>
                     <span id="calc-eq-motor" class="font-bold text-white">0 Km</span>
                   </div>
-
                   <div class="flex items-center justify-between">
                     <span class="text-emerald-100 flex items-center gap-2">
                       <i class="fa-solid fa-tree text-green-300"></i> Serapan Karbon Pohon
@@ -296,18 +230,13 @@
                   </div>
                 </div>
               </div>
-
-              <!-- Action Buttons -->
               <div class="pt-2 flex flex-col gap-2.5">
                 <a href="#peta" class="w-full py-3 rounded-xl bg-white text-emerald-900 hover:bg-emerald-50 text-xs font-extrabold text-center transition flex items-center justify-center gap-2 shadow-md">
                   <i class="fa-solid fa-map-pin text-emerald-700"></i>
                   <span>Cari Lokasi Bank Sampah Penampung</span>
                 </a>
               </div>
-
             </div>
-
-            <!-- Disclaimer Notice Box -->
             <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 leading-relaxed flex items-start gap-3">
               <i class="fa-solid fa-circle-exclamation text-amber-600 text-base mt-0.5 shrink-0"></i>
               <div>
@@ -317,39 +246,24 @@
                 </p>
               </div>
             </div>
-
           </div>
-
         </div>
-
       </div>
     </section>
-
-
-    <!-- =========================================================================
-         BAGIAN 2: PETA INTERAKTIF BANK SAMPAH (LEAFLET.JS)
-         ========================================================================= -->
     <section id="peta" class="py-20 bg-[#FAFAF9]">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
           <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">Temukan Bank Sampah Terdekat</h2>
           <p class="text-sm text-slate-600">
             Jelajahi titik bank sampah resmi yang terdata, periksa jenis sampah yang diterima, jam buka, dan hubungi kontak penanggung jawab secara langsung.
           </p>
         </div>
-
-        <!-- Filter Controls Toolbar -->
         <div class="p-4 sm:p-5 rounded-3xl bg-white border border-slate-200 shadow-sm mb-8 space-y-4">
           <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
-            
-            <!-- Search Input -->
             <div class="sm:col-span-5 relative">
               <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
               <input type="text" id="map-search-input" placeholder="Cari nama bank sampah atau jalan..." class="form-input text-xs sm:text-sm pl-9">
             </div>
-
-            <!-- Category Filter Dropdown -->
             <div class="sm:col-span-3">
               <select id="map-category-filter" class="form-input text-xs sm:text-sm">
                 <option value="Semua">Semua Kategori Sampah</option>
@@ -361,16 +275,12 @@
                 <option value="Elektronik">Menerima E-Waste</option>
               </select>
             </div>
-
-            <!-- Checkbox Layanan Jemput -->
             <div class="sm:col-span-2 flex items-center">
               <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700">
                 <input type="checkbox" id="map-jemput-filter" class="accent-emerald-700 w-4 h-4 rounded">
                 <span>Ada Jemput Sampah</span>
               </label>
             </div>
-
-            <!-- Buttons: GPS & Reset -->
             <div class="sm:col-span-2 flex items-center gap-2 justify-end">
               <button id="map-geoloc-btn" type="button" class="py-2.5 px-3 rounded-xl bg-emerald-100 text-emerald-800 hover:bg-emerald-200 text-xs font-bold transition flex items-center gap-1.5" title="Deteksi Lokasi GPS Saya">
                 <i class="fa-solid fa-location-crosshairs"></i>
@@ -380,10 +290,7 @@
                 <i class="fa-solid fa-rotate-left"></i>
               </button>
             </div>
-
           </div>
-
-          <!-- Counter Strip & Hint -->
           <div class="flex items-center justify-between text-xs pt-3 border-t border-slate-100">
             <span id="map-locations-count" class="font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
               10 Lokasi Ditemukan
@@ -393,23 +300,13 @@
             </span>
           </div>
         </div>
-
-        <!-- Split Grid: Map & Locations List -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          <!-- Sisi Kiri / Kolom List Bank Sampah -->
           <div class="lg:col-span-5 space-y-3 max-h-[520px] overflow-y-auto pr-1" id="map-locations-list">
-            <!-- Rendered by js/peta.js -->
           </div>
-
-          <!-- Sisi Kanan / Map Container Leaflet.js -->
           <div class="lg:col-span-7 rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-100 relative">
             <div id="map"></div>
           </div>
-
         </div>
-
-        <!-- Ajakan Usulkan Lokasi Baru -->
         <div class="mt-12 p-6 rounded-2xl bg-white border border-slate-200 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
           <div class="text-left">
             <h4 class="text-sm font-bold text-slate-900">Punya Bank Sampah di Lingkunganmu yang Belum Terdaftar?</h4>
@@ -419,19 +316,12 @@
             <i class="fa-solid fa-plus-circle mr-1"></i> Usulkan Bank Sampah
           </a>
         </div>
-
       </div>
     </section>
-
   </main>
-
-  <!-- =========================================================================
-       FOOTER
-       ========================================================================= -->
   <footer class="bg-[#14261C] text-slate-300 pt-16 pb-12 border-t border-emerald-950">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
-        
         <div class="lg:col-span-2 space-y-4">
           <a href="index.html" class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-xl bg-white p-1.5 flex items-center justify-center shadow-sm">
@@ -448,7 +338,6 @@
             <p><i class="fa-solid fa-envelope mr-1.5 text-emerald-400"></i> Email Perusahaan: kontak@setorin.id</p>
           </div>
         </div>
-
         <div>
           <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4 font-heading">Layanan</h4>
           <ul class="space-y-2.5 text-xs text-slate-400">
@@ -459,7 +348,6 @@
             <li><a href="contact.html" class="hover:text-emerald-400 transition">Hubungi Kami</a></li>
           </ul>
         </div>
-
         <div>
           <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4 font-heading">Komoditas Daur Ulang</h4>
           <ul class="space-y-2.5 text-xs text-slate-400">
@@ -470,7 +358,6 @@
             <li><span class="hover:text-emerald-400 transition cursor-pointer">E-Waste / Limbah Elektronik</span></li>
           </ul>
         </div>
-
         <div>
           <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4 font-heading">Kabar Lingkungan</h4>
           <p class="text-xs text-slate-400 leading-relaxed mb-3">
@@ -483,9 +370,7 @@
             </button>
           </form>
         </div>
-
       </div>
-
       <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
         <p>© 2026 PT Setor Inovasi Nusantara. Seluruh hak cipta dilindungi.</p>
         <div class="flex items-center gap-4">
@@ -496,14 +381,9 @@
       </div>
     </div>
   </footer>
-
-  <!-- Leaflet.js JS CDN -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-  <!-- App Scripts -->
   <script src="js/main.js"></script>
-  <script src="js/kalkulator.js"></script>
+  <script src="js/calculator.js"></script>
   <script src="js/peta.js"></script>
 </body>
 </html>
-

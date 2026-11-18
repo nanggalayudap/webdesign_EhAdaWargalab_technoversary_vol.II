@@ -1,8 +1,3 @@
-/**
- * SetorIn - Peta Digital Lokasi Bank Sampah
- * Jaringan Kemitraan Resmi SetorIn
- */
-
 const FALLBACK_LOKASI_BANK_SAMPAH = [
   {
     "id": "bs-01",
@@ -165,21 +160,16 @@ const FALLBACK_LOKASI_BANK_SAMPAH = [
     "catatan": "Menerima seluruh jenis sampah anorganik terpilah kawasan wisata religi dan pemukiman Martajasah."
   }
 ];
-
 let leafletMap = null;
 let markersLayer = null;
 let lokasiData = [];
 let markerRegistry = {};
-
 document.addEventListener('DOMContentLoaded', () => {
   initMapModule();
 });
-
 async function initMapModule() {
   const mapElement = document.getElementById('map');
   if (!mapElement) return;
-
-  // Fetch or fallback
   try {
     const res = await fetch('data/lokasi.json');
     if (res.ok) {
@@ -191,39 +181,31 @@ async function initMapModule() {
     console.info('Using fallback bank sampah locations for offline/file protocol.');
     lokasiData = FALLBACK_LOKASI_BANK_SAMPAH;
   }
+  if (!window.L) {
+    mapElement.textContent = 'Peta belum dapat dimuat. Periksa koneksi internet lalu muat ulang halaman.';
+    return;
+  }
 
-  // Initialize Leaflet Map centered on Universitas Trunojoyo Madura (Telang, Bangkalan)
   leafletMap = L.map('map', {
     scrollWheelZoom: false
   }).setView([-7.1278, 112.7231], 12);
-
-  // Free OpenStreetMap Tiles
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | SetorIn',
     maxZoom: 18
   }).addTo(leafletMap);
-
   markersLayer = L.layerGroup().addTo(leafletMap);
-
-  // Setup UI filters & render
   setupMapFilterEvents();
   renderMapAndList(lokasiData);
 }
-
 function renderMapAndList(dataList) {
   if (!leafletMap || !markersLayer) return;
-
-  // Clear existing markers
   markersLayer.clearLayers();
   markerRegistry = {};
-
   const listContainer = document.getElementById('map-locations-list');
   const countBadge = document.getElementById('map-locations-count');
-  
   if (countBadge) {
     countBadge.textContent = `${dataList.length} Lokasi Ditemukan`;
   }
-
   if (dataList.length === 0) {
     if (listContainer) {
       listContainer.innerHTML = `
@@ -236,12 +218,8 @@ function renderMapAndList(dataList) {
     }
     return;
   }
-
-  // Add markers to map
   const bounds = [];
-
   dataList.forEach(loc => {
-    // Custom Pin HTML Icon
     const customIcon = L.divIcon({
       className: 'custom-pin-wrapper',
       html: `
@@ -253,11 +231,9 @@ function renderMapAndList(dataList) {
       iconAnchor: [19, 19],
       popupAnchor: [0, -20]
     });
-
-    const categoriesBadge = loc.kategori.map(cat => 
+    const categoriesBadge = loc.kategori.map(cat =>
       `<span class="inline-block text-[10px] font-semibold bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded-md border border-emerald-200">${cat}</span>`
     ).join(' ');
-
     const popupHtml = `
       <div class="space-y-2 text-slate-800">
         <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-800">
@@ -287,25 +263,19 @@ function renderMapAndList(dataList) {
         </div>
       </div>
     `;
-
     const marker = L.marker([loc.lat, loc.lng], { icon: customIcon }).bindPopup(popupHtml);
     markersLayer.addLayer(marker);
     markerRegistry[loc.id] = marker;
     bounds.push([loc.lat, loc.lng]);
   });
-
-  // Fit bounds if multiple points
   if (bounds.length > 0) {
     leafletMap.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
   }
-
-  // Render Sidebar List
   if (listContainer) {
     listContainer.innerHTML = dataList.map(loc => {
       const jemputBadge = loc.layananJemput
         ? `<span class="text-[10px] font-bold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-md flex items-center gap-1"><i class="fa-solid fa-truck"></i> Jemput Tersedia</span>`
         : `<span class="text-[10px] font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">Drop-off Saja</span>`;
-
       return `
         <div class="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-sm transition-all hover:border-emerald-300 hover:shadow-md cursor-pointer group" onclick="focusOnLocation('${loc.id}')">
           <div class="flex items-start justify-between gap-2 mb-1.5">
@@ -332,47 +302,38 @@ function renderMapAndList(dataList) {
     }).join('');
   }
 }
-
 function focusOnLocation(id) {
   const marker = markerRegistry[id];
   const loc = lokasiData.find(l => l.id === id);
   if (marker && loc && leafletMap) {
     leafletMap.flyTo([loc.lat, loc.lng], 15, { duration: 1.2 });
     marker.openPopup();
-    
-    // Scroll smoothly to map on small screen
     if (window.innerWidth < 1024) {
       document.getElementById('map')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }
 }
-
 function setupMapFilterEvents() {
   const searchInput = document.getElementById('map-search-input');
   const catFilter = document.getElementById('map-category-filter');
   const jemputCheckbox = document.getElementById('map-jemput-filter');
   const resetBtn = document.getElementById('map-reset-filter');
   const geolocBtn = document.getElementById('map-geoloc-btn');
-
   function applyFilters() {
     const query = (searchInput?.value || '').toLowerCase().trim();
     const selectedCat = catFilter?.value || 'Semua';
     const requireJemput = jemputCheckbox?.checked || false;
-
     const filtered = lokasiData.filter(loc => {
       const matchQuery = loc.nama.toLowerCase().includes(query) || loc.alamat.toLowerCase().includes(query);
       const matchCat = (selectedCat === 'Semua') || loc.kategori.includes(selectedCat);
       const matchJemput = !requireJemput || loc.layananJemput === true;
       return matchQuery && matchCat && matchJemput;
     });
-
     renderMapAndList(filtered);
   }
-
   searchInput?.addEventListener('input', applyFilters);
   catFilter?.addEventListener('change', applyFilters);
   jemputCheckbox?.addEventListener('change', applyFilters);
-
   resetBtn?.addEventListener('click', () => {
     if (searchInput) searchInput.value = '';
     if (catFilter) catFilter.value = 'Semua';
@@ -380,25 +341,18 @@ function setupMapFilterEvents() {
     renderMapAndList(lokasiData);
     window.showToast?.('Filter peta telah direset.', 'info');
   });
-
-  // Browser Geolocation
   geolocBtn?.addEventListener('click', () => {
     if (!navigator.geolocation) {
       window.showToast?.('Geolokasi tidak didukung oleh browsermu.', 'warning');
       return;
     }
-
     geolocBtn.disabled = true;
     geolocBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
-
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const userLat = pos.coords.latitude;
         const userLng = pos.coords.longitude;
-
         leafletMap.flyTo([userLat, userLng], 14, { duration: 1.5 });
-
-        // Add user marker
         L.circleMarker([userLat, userLng], {
           radius: 8,
           fillColor: '#3B82F6',
@@ -407,7 +361,6 @@ function setupMapFilterEvents() {
           opacity: 1,
           fillOpacity: 0.9
         }).addTo(leafletMap).bindPopup('<b>Lokasi Kamu Saat Ini</b>').openPopup();
-
         window.showToast?.('Lokasimu berhasil ditemukan pada peta!', 'success');
         geolocBtn.disabled = false;
         geolocBtn.innerHTML = '<i class="fa-solid fa-location-crosshairs mr-1.5"></i> Lokasi Saya';
@@ -420,6 +373,4 @@ function setupMapFilterEvents() {
     );
   });
 }
-
 window.focusOnLocation = focusOnLocation;
-
