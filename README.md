@@ -85,7 +85,7 @@ setorin-platform/
 ## Spesifikasi Teknologi
 
 - **Kerangka Frontend:** HTML5 Semantik, CSS3 murni, dan Tailwind CSS via CDN.
-- **Bahasa Pemrograman:** Vanilla JavaScript (ECMAScript 6+) tanpa kerangka kerja eksternal berat.
+- **Bahasa Pemrograman:** Javascript
 - **Pustaka Geospasial:** Leaflet.js versi 1.9.4 dan OpenStreetMap Tiles.
 - **Ikonografi:** Font Awesome Free 6.5.1 (format SVG/CSS).
 - **Tipografi:** Google Fonts (Plus Jakarta Sans dan Outfit).
