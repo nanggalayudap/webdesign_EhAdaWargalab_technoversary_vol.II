@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/icons/logoNoBG.png" alt="Logo SetorIn" width="88">
+</p>
+
 # SetorIn - Platform Bank Sampah Digital & Daur Ulang Terintegrasi
 
 Platform web interaktif yang dikembangkan oleh PT Setor Inovasi Nusantara untuk mendigitalkan ekosistem bank sampah, memfasilitasi pemilahan sampah anorganik dari rumah tangga, memberikan transparansi estimasi nilai ekonomi, serta menghubungkan masyarakat dengan jaringan bank sampah mitra resmi di seluruh Indonesia.
