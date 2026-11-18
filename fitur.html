@@ -79,25 +79,78 @@
     </div>
   </header>
   <main class="flex-grow">
-    <section class="gradient-hero py-14 border-b border-emerald-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold mb-3">
-        </div>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 font-heading mb-4">
-          Kalkulator Nilai & Peta Digital Bank Sampah
-        </h1>
-        <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed mb-6">
-          Dua instrumen digital utama untuk mempermudah gaya hidup minim sampah. Hitung nilai ekonomis sampahmu hari ini dan tentukan lokasi setor terdekat secara cepat.
-        </p>
-        <div class="flex items-center justify-center gap-3">
-          <a href="#kalkulator" class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-emerald-700 text-white hover:bg-emerald-800 shadow-md transition flex items-center gap-2">
-            <i class="fa-solid fa-calculator"></i>
-            <span>1. Kalkulator Nilai & Dampak</span>
-          </a>
-          <a href="#peta" class="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white text-emerald-800 border border-emerald-300 hover:bg-emerald-50 shadow-sm transition flex items-center gap-2">
-            <i class="fa-solid fa-map-location-dot text-emerald-600"></i>
-            <span>2. Peta Lokasi Bank Sampah</span>
-          </a>
+    <!-- =========================================================================
+         PAGE HERO BANNER & QUICK JUMP
+         ========================================================================= -->
+    <!-- HERO SECTION: SPLIT LAYOUT + KOLASE KARTU UTUH TANPA TERPOTONG -->
+    <section class="gradient-hero relative overflow-hidden border-b border-slate-200/80">
+      <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 py-12 lg:py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+          <div class="lg:col-span-5 z-10">
+            <div class="relative inline-block">
+              <span class="hero-script-accent block text-3xl sm:text-4xl text-emerald-600 -mb-2 ml-1 select-none">
+                Kalkulator Nilai
+              </span>
+              <h1 class="font-heading text-3xl sm:text-4xl lg:text-[2.65rem] font-black uppercase tracking-tight text-[#14261C] leading-[1.08]">
+                &amp; Peta Digital<br />
+                Bank Sampah
+              </h1>
+            </div>
+            <p class="mt-4 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-md">
+              Hitung estimasi nilai tukar sampah terpilah secara transparan dan temukan titik lokasi Bank Sampah terdekat di wilayahmu.
+            </p>
+            <div class="mt-7 flex flex-wrap items-center gap-3">
+              <a href="#kalkulator" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#14261C] hover:bg-emerald-800 text-white text-xs sm:text-sm font-semibold shadow-sm transition">
+                <i class="fa-solid fa-calculator text-emerald-400"></i> Hitung Nilai Sampah
+              </a>
+              <a href="#peta" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-[#14261C] border border-slate-300 text-xs sm:text-sm font-semibold transition">
+                <i class="fa-solid fa-location-dot text-emerald-600"></i> Buka Peta Lokasi
+              </a>
+            </div>
+            <div class="mt-9 pt-4 border-t border-slate-200/80 max-w-[240px]">
+              <p class="text-xs font-semibold tracking-wide text-[#14261C]/70">
+                @ehadawargalab
+              </p>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 flex items-center justify-center py-4 sm:py-6">
+            <div class="collage-board w-full max-w-[520px] grid grid-cols-3 gap-3 sm:gap-3.5">
+              <div class="flex flex-col gap-3 sm:gap-3.5 -translate-y-3">
+                <div class="collage-card">
+                  <img src="assets/img/k1.jpg" alt="Dokumentasi Bank Sampah 1" loading="lazy" />
+                </div>
+                <div class="collage-card">
+                  <img src="assets/img/k2.jpg" alt="Dokumentasi Bank Sampah 2" loading="lazy" />
+                </div>
+                <div class="collage-card">
+                  <img src="assets/img/k3.jpg" alt="Dokumentasi Bank Sampah 3" loading="lazy" />
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 sm:gap-3.5 translate-y-3">
+                <div class="collage-card">
+                  <img src="assets/img/k4.jpg" alt="Dokumentasi Bank Sampah 4" loading="lazy" />
+                </div>
+                <div class="collage-card">
+                  <img src="assets/img/k5.jpg" alt="Dokumentasi Bank Sampah 5" loading="lazy" />
+                </div>
+                <div class="collage-card">
+                  <img src="assets/img/k6.jpg" alt="Dokumentasi Bank Sampah 6" loading="lazy" />
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 sm:gap-3.5 -translate-y-2">
+                <div class="collage-card">
+                  <img src="assets/img/k7.jpg" alt="Dokumentasi Bank Sampah 7" loading="lazy" />
+                </div>
+                <div class="collage-card">
+                  <img src="assets/img/k8.jpg" alt="Dokumentasi Bank Sampah 8" loading="lazy" />
+                </div>
+                <div class="collage-card">
+                  <img src="assets/img/k9.jpg" alt="Dokumentasi Bank Sampah 9" loading="lazy" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

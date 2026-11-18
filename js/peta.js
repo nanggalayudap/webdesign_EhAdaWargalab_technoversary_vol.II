@@ -224,7 +224,7 @@ function renderMapAndList(dataList) {
       className: 'custom-pin-wrapper',
       html: `
         <div class="custom-pin" title="${loc.nama}">
-          <i class="fa-solid fa-recycle"></i>
+          <img src="assets/icons/logoNoBG.png" alt="SetorIn Pin" class="w-5 h-5 object-contain pointer-events-none">
         </div>
       `,
       iconSize: [38, 38],
@@ -237,7 +237,7 @@ function renderMapAndList(dataList) {
     const popupHtml = `
       <div class="space-y-2 text-slate-800">
         <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-800">
-          <i class="fa-solid fa-tree"></i>
+          <img src="assets/icons/logoNoBG.png" alt="SetorIn" class="w-4 h-4 object-contain">
           <span>${loc.nama}</span>
         </div>
         <div class="flex items-center gap-1 text-[11px] text-amber-500">
@@ -308,6 +308,7 @@ function focusOnLocation(id) {
   if (marker && loc && leafletMap) {
     leafletMap.flyTo([loc.lat, loc.lng], 15, { duration: 1.2 });
     marker.openPopup();
+    // Scroll smoothly to map on small screen
     if (window.innerWidth < 1024) {
       document.getElementById('map')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
