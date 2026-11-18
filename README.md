@@ -108,8 +108,21 @@ Website ini dirancang secara modular dan dapat langsung dijalankan tanpa tahapan
 
 ---
 
-## Hak Cipta & Informasi Perusahaan
+## Hak Cipta & Informasi Pengembang
 
-Hak Cipta 2026 PT Setor Inovasi Nusantara (SetorIn). Seluruh hak cipta dilindungi undang-undang.
-Alamat Operasional: Gedung Inkubator Bisnis & Inovasi, Universitas Trunojoyo Madura, Jl. Raya Telang, Kec. Kamal, Kab. Bangkalan, Madura, Jawa Timur 69162.
-Kontak: kontak@setorin.id | +62 812-3456-7890
+Hak Cipta (c) 2026 **SetorIn** — Dikembangkan oleh **Tim Eh Ada Wargalab**.  
+
+### Susunan Pengembang (Tim Eh Ada Wargalab)
+
+| No. | Nama Lengkap | Peran / Fokus |
+| :---: | :--- | :--- |
+| 1 | **Nanggala Yuda Pratama** | Frontend & Logic Engineering |
+| 2 | **Moh. Nafis Muzadi** | UI/UX & Visual Design |
+| 3 | **Perdiyanto** | Content & Environmental Research |
+
+### Informasi Instansi & Operasional
+
+- **Instansi:** Universitas Trunojoyo Madura (UTM)
+- **Fakultas / Lokasi:** Gedung Inkubator Bisnis & Inovasi, Universitas Trunojoyo Madura  
+  Jl. Raya Telang, PO. BOX 2, Kec. Kamal, Kab. Bangkalan, Madura, Jawa Timur 69162
+- **Kontak Perusahaan:** kontak@setorin.id | +62 857-5547-1944
