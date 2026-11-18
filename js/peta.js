@@ -147,22 +147,6 @@ const FALLBACK_LOKASI_BANK_SAMPAH = [
     "reviewCount": 71,
     "layananJemput": true,
     "catatan": "Fokus pada pembersihan limbah plastik pesisir pelabuhan Kamal selat Madura dan botol kaca kemasan."
-  },
-  {
-    "id": "bs-10",
-    "nama": "Bank Sampah Berkah Martajasah",
-    "kategori": ["Plastik", "Kertas", "Logam", "Elektronik", "Kaca"],
-    "alamat": "Jl. Raya Martajasah No. 33, Martajasah, Bangkalan",
-    "lat": -7.0180,
-    "lng": 112.7300,
-    "jamBuka": "Senin - Sabtu: 08.00 - 16.30 WIB",
-    "telepon": "+62 857-5547-1944",
-    "email": "berkah.martajasah@setorin.id",
-    "pj": "Bpk. Kholilur Rahman",
-    "rating": 4.9,
-    "reviewCount": 124,
-    "layananJemput": true,
-    "catatan": "Menerima seluruh jenis sampah anorganik terpilah kawasan wisata religi dan pemukiman Martajasah."
   }
 ];
 

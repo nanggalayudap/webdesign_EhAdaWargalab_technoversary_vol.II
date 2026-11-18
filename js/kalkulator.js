@@ -255,16 +255,18 @@ function renderBasketTable() {
   if (emptyState) emptyState.classList.add('hidden');
 
   basketList.innerHTML = userBasket.map((item, index) => {
-    const data = wasteCatalog.find(c => c.id === item.id) || FALLBACK_HARGA_SAMPAH.find(c => c.id === item.id);
+    const fallbackData = FALLBACK_HARGA_SAMPAH.find(c => c.id === item.id);
+    const data = wasteCatalog.find(c => c.id === item.id) || fallbackData;
     if (!data) return '';
 
     const subtotal = data.hargaPerSatuan * item.jumlah;
+    const iconClass = fallbackData?.icon || (data.icon?.startsWith('fa-') ? data.icon : 'fa-recycle');
 
     return `
       <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-2xl bg-white border border-slate-200/80 shadow-sm gap-3 transition-all hover:border-emerald-300">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-xl bg-emerald-100/70 text-emerald-800 flex items-center justify-center text-lg shrink-0">
-            <i class="fa-solid ${data.icon || 'fa-recycle'}"></i>
+            <i class="fa-solid ${iconClass}"></i>
           </div>
           <div>
             <h4 class="text-xs sm:text-sm font-bold text-slate-900">${data.nama}</h4>
